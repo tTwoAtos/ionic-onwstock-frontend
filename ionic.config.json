@@ -1,0 +1,7 @@
+{
+  "name": "product-scanner",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
