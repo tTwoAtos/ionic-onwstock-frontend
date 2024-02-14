@@ -1,13 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Product
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <div class="card-box">
+  <ion-card>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          Product List
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-card *ngFor="let card of cardsData">
       <ion-card-content>
         <ion-list>
@@ -24,22 +23,21 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
-  </div>
+  </ion-card>
 
-  <ion-card>
+  <ion-card *ngFor="let pub of pubData">
     <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-thumbnail slot="start">
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+            <img [alt]="pub.alt" [src]="pub.src" />
           </ion-thumbnail>
           <ion-label>
-            <h2>Pub Name</h2>
-            <p>Pub Description</p>
+            <h2>{{ pub.name }}</h2>
+            <p>{{ pub.description }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
-
   <ion-content />

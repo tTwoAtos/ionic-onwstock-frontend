@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { productcards } from './productcard.page';
+import { Component } from '@angular/core'
+import { productcard } from './productcard.page'
+import { pubcards } from './pubcard.page'
 
 @Component({
   selector: 'app-tab2',
@@ -8,6 +9,10 @@ import { productcards } from './productcard.page';
 })
 
 export class Tab2Page {
+  numberOfProducts: number = 0
   constructor() { }
-  public cardsData = productcards
+
+  public cardsData = productcard
+  public pubData = pubcards
+
 }
