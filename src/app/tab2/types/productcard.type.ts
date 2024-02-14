@@ -1,9 +1,9 @@
 type ProductCard = {
-    alt: string;
-    src: string;
-    name: string;
-    quantity: string;
-    category: string;
+    alt: string
+    src: string
+    name: string
+    quantity: string
+    category: string
 }
 
-export default ProductCard;
+export default ProductCard

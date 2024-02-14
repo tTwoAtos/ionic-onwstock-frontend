@@ -1,4 +1,4 @@
-import PubCards from "./types/pubcards.type"
+import PubCards from "../types/pubcards.type"
 
 export let pubcards: PubCards[] = [
     {

@@ -3,7 +3,7 @@ import { Component } from '@angular/core'
 /**
  * Specifics barcode
  */
-import { Barcode, BarcodeScanner, ScanResult } from '@capacitor-mlkit/barcode-scanning'
+import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 
 @Component({
   selector: 'app-tab1',
@@ -22,10 +22,10 @@ export class Tab1Page {
   public toastMessage = ""
   public toastDuration = 3000
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    BarcodeScanner.isSupported().then(async(result) => {
+    BarcodeScanner.isSupported().then(async (result) => {
       const isSupported = result.supported
       const isCameraAvailable = await this._requestCameraPermission()
       const hasUserGavePermission = await this._requestUserPermissions()
@@ -48,9 +48,9 @@ export class Tab1Page {
   async scan(): Promise<void> {
     if (this.isAvailable) {
       const { barcodes } = await BarcodeScanner.scan()
-      this.barcodes.push(... barcodes)
+      this.barcodes.push(...barcodes)
+    }
   }
-}
 
   public dismissToast(): void {
     this.isToastOpen = false

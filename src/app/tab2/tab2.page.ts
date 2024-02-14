@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import { productcard } from './productcard.page'
-import { pubcards } from './pubcard.page'
+import { productcard } from './static/productcard.page'
+import { pubcards } from './static/pubcard.page'
 
 @Component({
   selector: 'app-tab2',
