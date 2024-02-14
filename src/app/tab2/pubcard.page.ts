@@ -1,4 +1,6 @@
-export let pubcards = [
+import PubCards from "./types/pubcards.type"
+
+export let pubcards: PubCards[] = [
     {
         alt: 'Silhouette of mountains',
         src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',

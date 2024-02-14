@@ -15,4 +15,11 @@ export class Tab2Page {
   public cardsData = productcard
   public pubData = pubcards
 
+  public getNumberOfProducts() {
+    this.numberOfProducts = this.cardsData.length
+
+    if (this.numberOfProducts === 5) {
+      /** return add.pubData === 1*/
+    }
+  }
 }
