@@ -1,1 +1,3 @@
-export interface PubInterfaceService { }
+export interface PubInterfaceService {
+    getProduct(): string;
+}
