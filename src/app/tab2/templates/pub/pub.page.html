@@ -1,0 +1,17 @@
+<ion-content>
+  <ion-card *ngFor="let pub of pubData">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img [alt]="pub.alt" [src]="pub.src" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ pub.name }}</h2>
+            <p>{{ pub.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

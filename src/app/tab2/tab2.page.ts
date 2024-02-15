@@ -22,7 +22,6 @@ export class Tab2Page {
   generateCards() {
     let pubIndex: number = 0
     for (let i = 0; i < this.cardsData.length; i++) {
-
       this.cards.push(this.cardsData[i])
       this.regulateAdds
 
