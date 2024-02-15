@@ -6,5 +6,11 @@ export let pubcards: PubCards[] = [
         src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
         name: 'Pub Name',
         description: 'Pub Description',
+    },
+    {
+        alt: 'Silhouette of mountains',
+        src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
+        name: 'Pub Name 2',
+        description: 'Pub Description',
     }
 ]

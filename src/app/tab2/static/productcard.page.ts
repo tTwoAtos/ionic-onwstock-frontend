@@ -15,7 +15,7 @@ export let productcard: ProductCard[] = [
     {
         alt: 'Silhouette of mountains',
         src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-        name: 'Name product',
+        name: 'Product Name',
         quantity: 'Quantities',
         category: [
             'Subcategory 1',
@@ -26,7 +26,7 @@ export let productcard: ProductCard[] = [
     {
         alt: 'Silhouette of mountains',
         src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-        name: 'Name product',
+        name: 'Product Name',
         quantity: 'Quantities',
         category: [
             'Subcategory 1',
@@ -37,7 +37,7 @@ export let productcard: ProductCard[] = [
     {
         alt: 'Silhouette of mountains',
         src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-        name: 'Name product',
+        name: 'Product Name',
         quantity: 'Quantities',
         category: [
             'Subcategory 1',
@@ -48,7 +48,7 @@ export let productcard: ProductCard[] = [
     {
         alt: 'Silhouette of mountains',
         src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-        name: 'Name product',
+        name: 'Product Name',
         quantity: 'Quantities',
         category: [
             'Subcategory 1',
@@ -59,7 +59,7 @@ export let productcard: ProductCard[] = [
     {
         alt: 'Silhouette of mountains',
         src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-        name: 'Name product',
+        name: 'Product Name',
         quantity: 'Quantities',
         category: [
             'Subcategory 1',

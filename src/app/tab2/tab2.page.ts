@@ -16,10 +16,16 @@ export class Tab2Page {
   regulateAdds = new PubPage().regulateNumOfAds()
 
   constructor() {
+    this.generateCards()
+  }
+
+  generateCards() {
     let pubIndex: number = 0
     for (let i = 0; i < this.cardsData.length; i++) {
+
       this.cards.push(this.cardsData[i])
       this.regulateAdds
+
       if ((i + 1) % 3 === 0) {
         this.cards.push(this.pubDatas[pubIndex])
         pubIndex++
