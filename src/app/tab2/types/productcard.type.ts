@@ -3,7 +3,7 @@ type ProductCard = {
     src: string
     name: string
     quantity: string
-    category: string
+    category: string[]
 }
 
 export default ProductCard

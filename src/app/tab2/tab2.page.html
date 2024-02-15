@@ -19,7 +19,9 @@
           <ion-label>
             <h2>{{ card.name }}</h2>
             <p>{{ card.description || card.quantity }}</p>
-            <p *ngIf="card.category">{{ card.category }}</p>
+            <p *ngIf="card.category">
+              <li>{{ card.category }}</li>
+            </p>
           </ion-label>
         </ion-item>
       </ion-list>
