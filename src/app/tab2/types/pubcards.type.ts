@@ -3,6 +3,7 @@ type PubCards = {
     src: string
     name: string
     description: string
+    styleClass?: string
 }
 
 export default PubCards
