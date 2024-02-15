@@ -9,7 +9,7 @@
     </ion-header>
   </ion-card>
 
-  <ion-card *ngFor="let card of cardsData">
+  <ion-card *ngFor="let card of cards">
     <ion-card-content>
       <ion-list>
         <ion-item>
@@ -17,30 +17,12 @@
             <img [alt]="card.alt" [src]="card.src" />
           </ion-thumbnail>
           <ion-label>
-            <h2>{{card.name}}</h2>
-            <p>{{card.quantity}}</p>
-            <p *ngIf="card.category">{{card.category}}</p>
+            <h2>{{ card.name }}</h2>
+            <p>{{ card.description || card.quantity }}</p>
+            <p *ngIf="card.category">{{ card.category }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
-
-  <ion-card *ngFor="let pub of pubData">
-    <ion-card-content color="secondary-shade">
-      <ion-list>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img [alt]="pub.alt" [src]="pub.src" />
-          </ion-thumbnail>
-          <ion-label>
-            <h2>{{ pub.name }}</h2>
-            <p>{{ pub.description }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-
 </ion-content>
