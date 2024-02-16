@@ -17,6 +17,11 @@ import { Tab2PageRoutingModule } from './tab2-routing.module'
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
   ],
+
+  providers: [
+    PubPage
+  ],
+
   declarations: [
     Tab2Page,
     PubPage
