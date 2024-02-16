@@ -14,14 +14,14 @@
       <ion-list>
         <ion-item>
           <ion-thumbnail slot="start">
-            <img [alt]="card.alt" [src]="card.src" />
+            <img [src]="card.thumbnail" />
           </ion-thumbnail>
           <ion-label>
             <h2>{{ card.name }}</h2>
-            <p>{{ card.description || card.quantity }}</p>
+            <!-- <p>{{ card.description || card.quantity }}</p>
             <p *ngIf="card.category">
               <li>{{ card.category }}</li>
-            </p>
+            </p> -->
           </ion-label>
         </ion-item>
       </ion-list>
