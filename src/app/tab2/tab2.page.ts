@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
+import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
-import { PubPage } from './templates/pub/pub.page'
 
 @Component({
   selector: 'app-tab2',
@@ -13,7 +13,7 @@ export class Tab2Page {
 
   constructor(
     private productService: ProductsService,
-    private pubImpl: PubPage
+    private pubImpl: PubPageComponent
   ) { }
 
   ngOnInit() {

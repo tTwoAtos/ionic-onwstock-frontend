@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular'
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module'
 import { Tab2Page } from './tab2.page'
 
-import { PubPage } from './templates/pub/pub.page'
+import { PubPageComponent as PubPage } from './pub/pub.component'
 
 import { Tab2PageRoutingModule } from './tab2-routing.module'
 
