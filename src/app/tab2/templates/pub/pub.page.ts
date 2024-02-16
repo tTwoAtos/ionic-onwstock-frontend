@@ -1,5 +1,5 @@
 import { Component } from "@angular/core"
-import { pubcards } from "../../static/pubcard.page"
+import { PubService } from "../../service/pubs/pub.service"
 
 @Component({
     selector: 'pub-page',
@@ -8,14 +8,26 @@ import { pubcards } from "../../static/pubcard.page"
 })
 
 export class PubPage {
-    pubData = pubcards
+    pubData: any
     numOfAds: number = 0
     adThreshold: number = 10
 
-    constructor() { }
+    constructor(private pubService: PubService) { }
 
     ngOnInit() {
+        this.getPubData()
         this.regulateNumOfAds()
+    }
+
+    getPubData() {
+        this.pubService.getPub().subscribe(
+            datas => {
+                this.pubData = datas
+            },
+            error => {
+                console.log('Error: ', error)
+            }
+        )
     }
 
     regulateNumOfAds() {

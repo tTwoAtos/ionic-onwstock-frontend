@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { productcard } from './static/productcard.page'
+import { ProductsService } from './service/product/products.service'
 import { PubPage } from './templates/pub/pub.page'
 
 @Component({
@@ -9,26 +9,31 @@ import { PubPage } from './templates/pub/pub.page'
 })
 
 export class Tab2Page {
-  numberOfProducts: number = 0
   cards: any[] = []
-  cardsData = productcard
-  pubDatas = new PubPage().pubData
-  regulateAdds = new PubPage().regulateNumOfAds()
 
-  constructor() {
+  constructor(
+    private productService: ProductsService,
+    private pubImpl: PubPage
+  ) { }
+
+  ngOnInit() {
     this.generateCards()
+    this.pubImpl.getPubData()
   }
 
   generateCards() {
     let pubIndex: number = 0
-    for (let i = 0; i < this.cardsData.length; i++) {
-      this.cards.push(this.cardsData[i])
-      this.regulateAdds
+    this.productService.getProducts().subscribe(datas => {
+      this.cards = datas
 
-      if ((i + 1) % 3 === 0) {
-        this.cards.push(this.pubDatas[pubIndex])
-        pubIndex++
+      for (let i = 0; i < this.cards.length; i++) {
+        this.pubImpl.regulateNumOfAds()
+
+        if ((i + 1) % 3 === 0) {
+          this.cards.splice(i, 0, this.pubImpl.pubData[pubIndex])
+          pubIndex++
+        }
       }
-    }
+    })
   }
 }
