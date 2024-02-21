@@ -2,10 +2,10 @@ import dataclasses
 import subprocess
 
 
-@dataclasses
+@dataclasses.dataclass
 class IonicAppBuilder:
     @staticmethod
-    def build_ionic(self):
+    def build_ionic():
         """
         A method to build an ionic app.
         """
