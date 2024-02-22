@@ -8,7 +8,7 @@ import { IProductsInterfaceService } from './interface/products.interface.servic
 })
 
 export class ProductsService implements IProductsInterfaceService {
-  private apiUrl = 'http://localhost:5000/api/v1/products'
+  private apiUrl = 'https://56df-147-161-180-116.ngrok-free.app/api/v1/products'
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<any> {
