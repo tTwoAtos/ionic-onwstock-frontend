@@ -8,7 +8,7 @@ import { IPubInterfaceService } from './interface/pub.interface.service';
 })
 
 export class PubService implements IPubInterfaceService {
-  private apiUrl = 'http://localhost:5000/api/v1/pubs'
+  private apiUrl = 'https://56df-147-161-180-116.ngrok-free.app/api/v1/pubs'
   constructor(private http: HttpClient) { }
   getPub(): Observable<any> {
     return this.http.get(this.apiUrl)
