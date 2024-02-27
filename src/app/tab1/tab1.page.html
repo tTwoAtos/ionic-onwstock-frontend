@@ -15,16 +15,11 @@
     </ion-list>
     <!-- Scan button -->
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button
-        (click)="scan()">
+      <ion-fab-button (click)="scan()">
         <ion-icon name="scan"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </ng-container>
-  <ion-toast
-    [isOpen]="isToastOpen"
-    [message]="toastMessage"
-    [duration]="toastDuration"
-    (didDismiss)="dismissToast()"
-  ></ion-toast>
+  <ion-toast [isOpen]="isToastOpen" [message]="toastMessage" [duration]="toastDuration"
+    (didDismiss)="dismissToast()"></ion-toast>
 </ion-content>

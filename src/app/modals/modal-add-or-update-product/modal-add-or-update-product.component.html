@@ -1,0 +1,55 @@
+<ion-button (click)="toggle()">Toggle Modal</ion-button>
+
+<ion-content class="ion-padding">
+    <ion-modal [isOpen]="isModalOpen">
+        <ng-template>
+            <form [formGroup]="form" (submit)="confirm()" class="h-full">
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-title>Welcome</ion-title>
+                    </ion-toolbar>
+                </ion-header>
+
+                <ion-content>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <ion-img [src]="product.thumbnail" placeholder="product.name" />
+                            </ion-col>
+
+                            <ion-col>
+                                <ion-item>
+                                    <ion-label position="floating">Nom</ion-label>
+                                    <ion-input formControlName="name" [value]="product.name" [(ngModel)]="product.name"
+                                        required maxLength="255"></ion-input>
+                                </ion-item>
+
+
+                                <ion-item>
+                                    <ion-label position="floating">Quantité</ion-label>
+                                    <ion-input formControlName="quantity" type="number" [value]="product.quantity"
+                                        [(ngModel)]="product.quantity" required></ion-input>
+
+                                    <ion-text color="danger" size="sm" *ngIf="form.controls.quantity?.errors?.min">
+                                        La quantité doit être positive
+                                    </ion-text>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-content>
+
+            </form>
+            <ion-footer>
+                <ion-row>
+                    <ion-col text-center>
+                        <ion-button (click)="cancel()">Annuler</ion-button>
+                    </ion-col>
+                    <ion-col text-center class="ion-text-end">
+                        <ion-button (click)="confirm()">Ajouter</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-footer>
+        </ng-template>
+    </ion-modal>
+</ion-content>
