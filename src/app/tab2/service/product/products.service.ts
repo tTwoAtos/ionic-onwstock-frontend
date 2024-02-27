@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment'
@@ -12,6 +12,14 @@ export class ProductsService implements IProductsInterfaceService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<any> {
-    return this.http.get(environment.API_URL + '/products')
+    const headers = new HttpHeaders()
+      .set('ngrok-skip-browser-warning', 'true')
+    return this.http.get(environment.API_URL + '/products', { headers: headers })
+  }
+
+  addProduct(): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('ngrok-skip-browser-warning', 'true')
+    return this.http.get(environment.API_URL + '/products', { headers: headers })
   }
 }
