@@ -4,6 +4,7 @@ import { Component } from '@angular/core'
  * Specifics barcode
  */
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
+import { Product } from '../tab2/types/product.type'
 
 @Component({
   selector: 'app-tab1',
@@ -22,6 +23,14 @@ export class Tab1Page {
   public toastMessage = ""
   public toastDuration = 3000
 
+  public testProduct: Product = {
+    "name": "Rice Noodles",
+    "nbScanned": 3,
+    "nbAdded": 2,
+    "thumbnail": "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.100.jpg",
+    "eancode": "0737628064502"
+  }
+
   constructor() { }
 
   ngOnInit() {
@@ -29,6 +38,8 @@ export class Tab1Page {
       const isSupported = result.supported
       const isCameraAvailable = await this._requestCameraPermission()
       const hasUserGavePermission = await this._requestUserPermissions()
+      console.log(isSupported, isCameraAvailable);
+
       this.isAvailable = isSupported && isCameraAvailable
 
       const isModuleAvailable = await this._requestModule()
