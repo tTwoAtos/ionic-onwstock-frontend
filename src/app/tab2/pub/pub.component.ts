@@ -1,5 +1,6 @@
 import { Component } from "@angular/core"
 import { PubService } from "../service/pubs/pub.service"
+import { Product } from "../types/product.type"
 @Component({
   selector: 'pub-page',
   templateUrl: 'pub.component.html',
@@ -7,7 +8,7 @@ import { PubService } from "../service/pubs/pub.service"
 })
 
 export class PubPageComponent {
-  pubData: any
+  pubData: Product
   numOfAds: number = 0
   adThreshold: number = 10
 
@@ -22,6 +23,7 @@ export class PubPageComponent {
     this.pubService.getPub().subscribe(
       datas => {
         this.pubData = datas
+        console.log(this.pubData)
       },
       error => {
         console.log('Error: ', error)

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
+import { Product } from './types/product.type'
 
 @Component({
   selector: 'app-tab2',
@@ -9,7 +10,7 @@ import { ProductsService } from './service/product/products.service'
 })
 
 export class Tab2Page {
-  cards: any[] = []
+  cards: Product[] = []
 
   constructor(
     private productService: ProductsService,
@@ -28,11 +29,6 @@ export class Tab2Page {
 
       for (let i = 0; i < this.cards.length; i++) {
         this.pubImpl.regulateNumOfAds()
-
-        if ((i + 1) % 3 === 0) {
-          this.cards.splice(i, 0, this.pubImpl.pubData[pubIndex])
-          pubIndex++
-        }
       }
     })
   }
