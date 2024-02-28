@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment'
+import { Product } from '../../types/product.type'
 import { IProductsInterfaceService } from './interface/products.interface.service'
 
 @Injectable({
@@ -27,5 +28,13 @@ export class ProductsService implements IProductsInterfaceService {
     const headers = new HttpHeaders()
       .set('ngrok-skip-browser-warning', 'true')
     return this.http.get(environment.API_LOCAL + `api/v1/product-to-community/{communityId}`, { headers: headers })
+  }
+
+  updateProduct(product: Product, productToCommunityID: number): Observable<any> {
+    return this.http.put(environment.API_URL + '/product-to-community/' + productToCommunityID, {
+      ...product,
+      productId: product.eancode,
+      qte: product.quantity
+    })
   }
 }
