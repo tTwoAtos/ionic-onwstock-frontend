@@ -14,12 +14,18 @@ export class ProductsService implements IProductsInterfaceService {
   getProducts(): Observable<any> {
     const headers = new HttpHeaders()
       .set('ngrok-skip-browser-warning', 'true')
-    return this.http.get(environment.API_URL + '/products', { headers: headers })
+    return this.http.get(environment.API_LOCAL + '/products', { headers: headers })
   }
 
   addProduct(): Observable<any> {
     const headers = new HttpHeaders()
       .set('ngrok-skip-browser-warning', 'true')
-    return this.http.get(environment.API_URL + '/products', { headers: headers })
+    return this.http.get(environment.API_LOCAL + '/products', { headers: headers })
+  }
+
+  getProductsByCommunity(communityId: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('ngrok-skip-browser-warning', 'true')
+    return this.http.get(environment.API_LOCAL + `api/v1/product-to-community/{communityId}`, { headers: headers })
   }
 }

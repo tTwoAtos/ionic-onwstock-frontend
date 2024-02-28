@@ -13,6 +13,6 @@ export class PubService implements IPubInterfaceService {
 
   getPub(): Observable<any> {
     const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true')
-    return this.http.get(environment.API_URL + '/pubs/testCom', { headers: headers })
+    return this.http.get(environment.API_LOCAL + '/pubs/testCom', { headers: headers })
   }
 }
