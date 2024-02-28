@@ -18,10 +18,13 @@ export class ProductsService implements IProductsInterfaceService {
     return this.http.get(environment.API_LOCAL + '/products', { headers: headers })
   }
 
-  addProduct(): Observable<any> {
-    const headers = new HttpHeaders()
-      .set('ngrok-skip-browser-warning', 'true')
-    return this.http.get(environment.API_LOCAL + '/products', { headers: headers })
+  addProduct(product: Product, communityID: string): Observable<any> {
+    return this.http
+      .post(environment.API_URL + '/product-to-community/' + communityID, {
+        ...product,
+        productId: product.eancode,
+        qte: product.quantity
+      })
   }
 
   getProductsByCommunity(communityId: string): Observable<any> {
@@ -31,7 +34,7 @@ export class ProductsService implements IProductsInterfaceService {
   }
 
   updateProduct(product: Product, productToCommunityID: number): Observable<any> {
-    return this.http.put(environment.API_URL + '/product-to-community/' + productToCommunityID, {
+    return this.http.put(environment.API_LOCAL + '/product-to-community/' + productToCommunityID, {
       ...product,
       productId: product.eancode,
       qte: product.quantity

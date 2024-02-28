@@ -54,6 +54,7 @@ export class ModalAddOrUpdateProductComponent implements OnInit {
         console.log(datas);
       })
     }
+
     else {
       this.productService.addProduct(this.product, 'testCom').subscribe(datas => {
         console.log(datas);
