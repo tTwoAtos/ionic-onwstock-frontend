@@ -11,7 +11,7 @@ import { ProductsService } from './../../tab2/service/product/products.service';
 export class ModalAddOrUpdateProductComponent implements OnInit {
   @Input() product: Product;
   @Input() updateMode: boolean = false;
-  public isModalOpen = true;
+  @Input() isModalOpen = false;
   public form: FormGroup;
 
   constructor(private productService: ProductsService, public formBuilder: FormBuilder) { }
