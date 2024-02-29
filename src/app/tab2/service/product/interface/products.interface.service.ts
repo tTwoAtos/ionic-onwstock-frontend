@@ -1,4 +1,6 @@
-import { GetProducts } from "./modules/getProduct";
+import { AddProducts } from "./modules/addProduct"
+import { GetProducts } from "./modules/getProduct"
+import { UpdateProduct } from "./modules/updateProduct"
 
 export interface IProductsInterfaceService
-    extends GetProducts { }
+    extends GetProducts, AddProducts, UpdateProduct { }
