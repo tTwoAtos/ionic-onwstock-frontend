@@ -1,6 +1,7 @@
 FROM node:latest
-WORKDIR /usr/src/app
+WORKDIR /src/app
 COPY package*.json ./
+RUN npm install -g @ionic/cli
 RUN npm install
 COPY . .
 RUN npx ionic build
