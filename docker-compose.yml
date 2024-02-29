@@ -1,0 +1,10 @@
+services:
+  ionic-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8101:8100"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
