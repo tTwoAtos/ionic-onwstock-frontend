@@ -23,3 +23,8 @@
   <ion-toast [isOpen]="isToastOpen" [message]="toastMessage" [duration]="toastDuration"
     (didDismiss)="dismissToast()"></ion-toast>
 </ion-content>
+
+<ion-content>
+  <modal-add-or-update-product [product]="product" [isModalOpen]="isModalOpen">
+  </modal-add-or-update-product>
+</ion-content>

@@ -4,6 +4,7 @@ import { Component } from '@angular/core'
  * Specifics barcode
  */
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
+import { ProductsService } from '../tab2/service/product/products.service'
 import { Product } from '../tab2/types/product.type'
 
 @Component({
@@ -22,16 +23,11 @@ export class Tab1Page {
   public isToastOpen = false
   public toastMessage = ""
   public toastDuration = 3000
+  public isModalOpen: boolean = false
 
-  public testProduct: Product = {
-    "name": "Rice Noodles",
-    "nbScanned": 3,
-    "nbAdded": 2,
-    "thumbnail": "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.100.jpg",
-    "eancode": "0737628064502"
-  }
+  public product: Product
 
-  constructor() { }
+  constructor(private productService: ProductsService) { }
 
   ngOnInit() {
     BarcodeScanner.isSupported().then(async (result) => {
@@ -60,6 +56,15 @@ export class Tab1Page {
     if (this.isAvailable) {
       const { barcodes } = await BarcodeScanner.scan()
       this.barcodes.push(...barcodes)
+    }
+    if (this.barcodes.length > 0) {
+      this.productService.saveProduct(this.barcodes[0].rawValue).subscribe(
+        datas => {
+          console.log(datas);
+          this.product = datas
+          this.isModalOpen = true
+        }
+      )
     }
   }
 

@@ -22,6 +22,16 @@ export class ProductsService implements IProductsInterfaceService {
     return this.http.get(environment.API_LOCAL + '/products', { headers: headers })
   }
 
+
+  saveProduct(barcode: string): Observable<any> {
+    const headers = new HttpHeaders()
+    return this.http
+
+      .get(environment.API_LOCAL + '/products/' + barcode, {
+        headers: headers
+      })
+  }
+
   /**
    * Adds a product to a community.
    * @param product - The product to be added.
@@ -30,7 +40,7 @@ export class ProductsService implements IProductsInterfaceService {
    */
   addProduct(product: Product, communityID: string): Observable<any> {
     return this.http
-      .post(environment.API_URL + '/product-to-community/' + communityID, {
+      .post(environment.API_LOCAL + '/product-to-community/' + communityID, {
         ...product,
         productId: product.eancode,
         qte: product.quantity
