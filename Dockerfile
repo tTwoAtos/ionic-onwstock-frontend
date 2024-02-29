@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:21-alpine
 WORKDIR /src/app
 COPY package*.json ./
 RUN npm install -g @ionic/cli
