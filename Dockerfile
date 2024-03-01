@@ -26,7 +26,6 @@ COPY tsconfig*.json /usr/src/app/
 
 # Copy the src directory
 RUN npx ionic build
-RUN npx cap sync android
 
 # Switch back to the new user
 RUN chown -R appuser:appuser /usr/src/app
