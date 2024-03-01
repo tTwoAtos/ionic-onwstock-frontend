@@ -17,13 +17,20 @@ USER root
 RUN npm install --ignore-scripts -g @ionic/cli
 RUN npm install --ignore-scripts
 
-COPY . .
+# Copy app source
+COPY src /usr/src/app/src
+COPY package*.json /usr/src/app/
+COPY ionic.config.json /usr/src/app/
+COPY angular.json /usr/src/app/
+COPY tsconfig*.json /usr/src/app/
+
+# Copy the src directory
 RUN npx ionic build
 RUN npx cap sync android
 
+# Switch back to the new user
 RUN chown -R appuser:appuser /usr/src/app
 USER appuser
 
 # Start the app
-EXPOSE 8101
 CMD [ "npx", "ionic", "serve", "--host=0.0.0.0" ]
