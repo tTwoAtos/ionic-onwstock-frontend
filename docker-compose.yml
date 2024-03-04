@@ -8,3 +8,4 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+    command: npx ionic serve --host=0.0.0.0
