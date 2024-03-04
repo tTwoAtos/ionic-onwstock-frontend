@@ -24,8 +24,9 @@ export class Tab2Page {
 
   generateCards() {
     let pubIndex: number = 0
-    this.productService.getProducts().subscribe(datas => {
-      this.cards = datas
+    const communityID = 'testCom'
+    this.productService.getProductsByCommunity(communityID).subscribe(listIDproducts => {
+      this.cards = listIDproducts
 
       for (let i = 0; i < this.cards.length; i++) {
         this.pubImpl.regulateNumOfAds()

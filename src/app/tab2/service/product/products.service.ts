@@ -26,7 +26,6 @@ export class ProductsService implements IProductsInterfaceService {
   saveProduct(barcode: string): Observable<any> {
     const headers = new HttpHeaders()
     return this.http
-
       .get(environment.API_LOCAL + '/products/' + barcode, {
         headers: headers
       })
@@ -55,7 +54,13 @@ export class ProductsService implements IProductsInterfaceService {
   getProductsByCommunity(communityId: string): Observable<any> {
     const headers = new HttpHeaders()
       .set('ngrok-skip-browser-warning', 'true')
-    return this.http.get(environment.API_LOCAL + `api/v1/product-to-community/{communityId}`, { headers: headers })
+    return this.http.get(environment.API_LOCAL + `/product-to-community/${communityId}`, { headers: headers })
+  }
+
+  getProductsByID(code: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('ngrok-skip-browser-warning', 'true')
+    return this.http.get(environment.API_LOCAL + `/products/${code}`, { headers: headers })
   }
 
   /**
