@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalAddOrUpdateUserComponent } from './modal-add-or-update-product.component';
+import { ModalAddOrUpdateProductComponent } from './modal-add-or-update-product.component';
 
-describe('ModalAddOrUpdateUserComponent', () => {
-  let component: ModalAddOrUpdateUserComponent;
-  let fixture: ComponentFixture<ModalAddOrUpdateUserComponent>;
+describe('ModalAddOrUpdateProductComponent', () => {
+  let component: ModalAddOrUpdateProductComponent;
+  let fixture: ComponentFixture<ModalAddOrUpdateProductComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModalAddOrUpdateUserComponent]
+      declarations: [ModalAddOrUpdateProductComponent]
     })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(ModalAddOrUpdateUserComponent);
+      .compileComponents();
+
+    fixture = TestBed.createComponent(ModalAddOrUpdateProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,15 +1,14 @@
 <ion-content>
-  <ion-card *ngFor="let pub of pubData">
+  <ion-card *ngIf="pubData">
     <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-thumbnail slot="start">
-            <img [alt]="pub.alt" [src]="pub.src" />
+            <img alt="Product" [src]="pubData.thumbnail" />
           </ion-thumbnail>
-          <ion-label>
-            <h2>{{ pub.name }}</h2>
-            <p>{{ pub.description }}</p>
-          </ion-label>
+          <ion-text>
+            <h2>{{ pubData.name }}</h2>
+          </ion-text>
         </ion-item>
       </ion-list>
     </ion-card-content>

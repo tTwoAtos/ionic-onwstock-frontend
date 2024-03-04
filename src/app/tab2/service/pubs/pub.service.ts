@@ -11,8 +11,12 @@ import { IPubInterfaceService } from './interface/pub.interface.service';
 export class PubService implements IPubInterfaceService {
   constructor(private http: HttpClient) { }
 
+  /**
+   * Retrieves the pub data from the server.
+   * @returns An Observable that emits the pub data.
+   */
   getPub(): Observable<any> {
     const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true')
-    return this.http.get(environment.API_URL + '/pubs/testCom', { headers: headers })
+    return this.http.get(environment.API_LOCAL + '/pubs/testCom', { headers: headers })
   }
 }

@@ -1,0 +1,4 @@
+# Allow specific directories
+!/src
+!/package.json
+!/package-lock.json
