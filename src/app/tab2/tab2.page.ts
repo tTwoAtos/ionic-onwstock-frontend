@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
 import { Product } from './types/product.type'
+import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 
 @Component({
   selector: 'app-tab2',
@@ -11,6 +12,10 @@ import { Product } from './types/product.type'
 
 export class Tab2Page {
   cards: Product[] = []
+  isAvailable = true
+  barcodes: any[] = []
+  product: Product
+  isModalOpen: boolean = false
 
   constructor(
     private productService: ProductsService,
@@ -20,6 +25,21 @@ export class Tab2Page {
   ngOnInit() {
     this.generateCards()
     this.pubImpl.getPubData()
+  }
+
+  async scan(): Promise<void> {
+    if (this.isAvailable) {
+      const { barcodes } = await BarcodeScanner.scan()
+      this.barcodes.push(...barcodes)
+    }
+    if (this.barcodes.length > 0) {
+      this.productService.saveProduct(this.barcodes[0].rawValue).subscribe(
+        datas => {
+          this.product = datas
+          this.isModalOpen = true
+        }
+      )
+    }
   }
 
   generateCards() {
