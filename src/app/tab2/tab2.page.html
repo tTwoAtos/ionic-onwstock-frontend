@@ -25,7 +25,9 @@
     </ion-card-content>
   </ion-card>
   <pub-page></pub-page>
-</ion-content>
-<ion-content>
-  <modal-add-or-update-product></modal-add-or-update-product>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="scan" (click)="scan()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
