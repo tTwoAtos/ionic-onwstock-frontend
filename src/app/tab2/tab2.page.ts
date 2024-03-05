@@ -17,6 +17,7 @@ export class Tab2Page {
   barcodes: any[] = []
   product: Product
   isModalOpen: boolean = false
+  productcard: typeof productcard
 
   constructor(
     private productService: ProductsService,
