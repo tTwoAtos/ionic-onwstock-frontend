@@ -9,7 +9,7 @@
     </ion-header>
   </ion-card>
 
-  <ion-card *ngFor="let card of cards">
+  <ion-card *ngFor="let card of productcard">
     <ion-card-content>
       <ion-list>
         <ion-item>
@@ -27,7 +27,7 @@
   <pub-page></pub-page>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button>
-      <ion-icon name="add-circle-outline" (click)="scan()"></ion-icon>
+      <ion-icon name="add-outline" (click)="scan()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

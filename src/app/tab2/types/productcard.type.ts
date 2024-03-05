@@ -1,6 +1,6 @@
 type ProductCard = {
     alt: string
-    src: string
+    thumbnail: string
     name: string
     quantity: string
     category: string[]
