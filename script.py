@@ -1,8 +1,7 @@
-import dataclasses
+from dataclasses import dataclass
 import subprocess
 
-
-@dataclasses.dataclass
+@dataclass
 class IonicAppBuilder:
     @staticmethod
     def build_ionic():
@@ -20,6 +19,14 @@ class IonicAppBuilder:
         print("Syncing with Android Studio")
         subprocess.run(["npx", "cap", "sync"], shell=True)
 
+    @staticmethod
+    def open_android():
+        """
+        A static method to open Android Studio.
+        """
+        print("Opening Android Studio")
+        subprocess.run(["npx", "cap", "open", "android"], shell=True)
+
     @classmethod
     def build_runner(cls):
         """
@@ -28,6 +35,7 @@ class IonicAppBuilder:
         print("Building runner")
         IonicAppBuilder.build_ionic()
         IonicAppBuilder.sync_android()
+        IonicAppBuilder.open_android()
 
 def main():
     ionic_builder = IonicAppBuilder()

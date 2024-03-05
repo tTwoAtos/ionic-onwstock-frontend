@@ -11,6 +11,7 @@
     <ion-list>
       <ion-item *ngFor="let barcode of barcodes">
         <ion-label>{{ barcode.rawValue }} [{{ barcode.format }}]</ion-label>
+        <ion-label>{{product}}</ion-label>
       </ion-item>
     </ion-list>
     <!-- Scan button -->

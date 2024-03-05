@@ -60,7 +60,6 @@ export class Tab1Page {
     if (this.barcodes.length > 0) {
       this.productService.saveProduct(this.barcodes[0].rawValue).subscribe(
         datas => {
-          console.log(datas);
           this.product = datas
           this.isModalOpen = true
         }

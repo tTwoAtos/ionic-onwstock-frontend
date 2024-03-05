@@ -4,5 +4,5 @@ export type Product = {
     nbAdded: number
     thumbnail: string
     eancode: string
-    quantity?: number
+    quantity: number
 }

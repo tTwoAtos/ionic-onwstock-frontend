@@ -1,4 +1,5 @@
 <ion-content color="secondary" [fullscreen]="true">
+  <!-- c:/Users/Aelion/devspace/ionic-onwstock-frontend/src/app/tab2/tab2.page.html -->
   <ion-card>
     <ion-header>
       <ion-toolbar>
@@ -9,19 +10,49 @@
     </ion-header>
   </ion-card>
 
-  <ion-card *ngFor="let card of cards">
+  <!-- Card of Porducts -->
+  <ion-card *ngFor="let card of productcard">
     <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-thumbnail slot="start">
-            <img alt="Product Image" [src]="card.thumbnail" />
+            <img alt="Product" [src]="card.thumbnail" />
           </ion-thumbnail>
           <ion-label>
             <h2>{{ card.name }}</h2>
+            <h3> {{ card.quantity }}</h3>
           </ion-label>
         </ion-item>
       </ion-list>
+      <ion-fab vertical="top" horizontal="end">
+        <ion-fab-button size="small" color="success">
+          <ion-icon name="add-sharp" (click)="addQuantity()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <br>
+      <ion-fab vertical="bottom" horizontal="end">
+        <ion-fab-button size="small" color="danger">
+          <ion-icon id="removeQte" name="remove-sharp" (click)="removeQuantity()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-card-content>
   </ion-card>
+
+  <!-- Pub HTML -->
   <pub-page></pub-page>
+
+  <!-- Scan button  -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add-outline" (click)="scan()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Delete button -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+    <ion-fab-button color="danger">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
