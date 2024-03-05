@@ -2,7 +2,7 @@ type ProductCard = {
     alt: string
     thumbnail: string
     name: string
-    quantity: string
+    quantity: number
     category: string[]
 }
 

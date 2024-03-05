@@ -60,8 +60,9 @@ export class Tab2Page {
   removeQuantity() {
     throw new Error('Method not implemented.')
   }
-  
+
   addQuantity() {
-    throw new Error('Method not implemented.')
+    for (let product of this.productcard)
+      product.quantity++
   }
 }
