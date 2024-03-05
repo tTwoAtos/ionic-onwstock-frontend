@@ -26,7 +26,7 @@ export class ProductsService implements IProductsInterfaceService {
   saveProduct(barcode: string): Observable<any> {
     const headers = new HttpHeaders()
     return this.http
-      .get(environment.API_LOCAL + '/products/' + barcode, {
+      .get(environment.API_LOCAL + `/products/${barcode}`, {
         headers: headers
       })
   }

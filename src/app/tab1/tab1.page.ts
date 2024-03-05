@@ -62,6 +62,7 @@ export class Tab1Page {
         datas => {
           this.product = datas
           this.isModalOpen = true
+          this.barcodes = []
         }
       )
     }
