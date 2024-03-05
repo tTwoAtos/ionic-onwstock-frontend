@@ -5,6 +5,7 @@ import { Product } from './types/product.type'
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 
 import { productcard } from './static/productcard.page'
+import ProductCard from './types/productcard.type'
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -57,18 +58,15 @@ export class Tab2Page {
     })
   }
 
-  removeQuantity() {
-    for (let product of this.productcard) {
-      product.quantity--
-      const removeBtn: HTMLIonFabButtonElement | null = document.getElementById('removeQte') as HTMLIonFabButtonElement
-      if (product.quantity === 0) removeBtn.disabled = true
-    }
+  removeQuantity(product: ProductCard, index: number) {
+    product.quantity--
+    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
+    if (product.quantity === 0) removeBtn.disabled = true
   }
 
-  addQuantity() {
-    for (let product of this.productcard)
-      product.quantity++
-      const removeBtn: HTMLIonFabButtonElement | null = document.getElementById('removeQte') as HTMLIonFabButtonElement
-      removeBtn.disabled = false
+  addQuantity(product: ProductCard, index: number) {
+    product.quantity++
+    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
+    removeBtn.disabled = false
   }
 }
