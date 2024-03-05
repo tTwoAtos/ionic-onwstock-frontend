@@ -1,4 +1,5 @@
 <ion-content color="secondary" [fullscreen]="true">
+  <!-- c:/Users/Aelion/devspace/ionic-onwstock-frontend/src/app/tab2/tab2.page.html -->
   <ion-card>
     <ion-header>
       <ion-toolbar>
@@ -9,6 +10,7 @@
     </ion-header>
   </ion-card>
 
+  <!-- Card of Porducts -->
   <ion-card *ngFor="let card of productcard">
     <ion-card-content>
       <ion-list>
@@ -34,15 +36,22 @@
       </ion-fab>
     </ion-card-content>
   </ion-card>
+
+  <!-- Pub HTML -->
   <pub-page></pub-page>
+
+  <!-- Scan button  -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button>
       <ion-icon name="add-outline" (click)="scan()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <!-- Delete button -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="start">
     <ion-fab-button color="danger">
       <ion-icon name="trash-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  
 </ion-content>
