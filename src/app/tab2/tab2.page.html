@@ -31,8 +31,8 @@
       </ion-fab>
       <br>
       <ion-fab vertical="bottom" horizontal="end">
-        <ion-fab-button size="small" color="danger">
-          <ion-icon id="removeQte" name="remove-sharp" (click)="removeQuantity()"></ion-icon>
+        <ion-fab-button id="removeQte" size="small" color="danger" [disabled]="product.quantity===0">
+          <ion-icon name="remove-sharp" (click)="removeQuantity()"></ion-icon>
         </ion-fab-button>
       </ion-fab>
     </ion-card-content>
