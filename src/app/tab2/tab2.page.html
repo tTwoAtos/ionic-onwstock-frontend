@@ -26,12 +26,12 @@
       </ion-list>
       <ion-fab vertical="bottom" horizontal="end">
         <ion-fab-button size="small" color="success">
-          <ion-icon name="add-sharp"></ion-icon>
+          <ion-icon name="add-sharp" (click)="addQuantity()"></ion-icon>
         </ion-fab-button>
       </ion-fab>
       <ion-fab vertical="bottom" horizontal="start">
         <ion-fab-button size="small" color="danger">
-          <ion-icon name="remove-sharp"></ion-icon>
+          <ion-icon name="remove-sharp" (click)="removeQuantity()"></ion-icon>
         </ion-fab-button>
       </ion-fab>
     </ion-card-content>
@@ -53,5 +53,5 @@
       <ion-icon name="trash-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  
+
 </ion-content>
