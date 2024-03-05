@@ -25,7 +25,8 @@ export class Tab2Page {
   ) { }
 
   ngOnInit() {
-    this.generateCards()
+    this.productcard = productcard
+    // this.generateCards()
     this.pubImpl.getPubData()
   }
 
