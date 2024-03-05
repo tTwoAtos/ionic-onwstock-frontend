@@ -58,7 +58,13 @@ export class Tab2Page {
   }
 
   removeQuantity() {
-    throw new Error('Method not implemented.')
+    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById('removeBtn') as HTMLIonFabButtonElement
+    for (let product of this.productcard) 
+      product.quantity--
+      if (this.product.quantity === 0) {
+        removeBtn.disabled = true
+      }
+    
   }
 
   addQuantity() {
