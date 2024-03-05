@@ -4,6 +4,7 @@ import { ProductsService } from './service/product/products.service'
 import { Product } from './types/product.type'
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 
+import { productcard } from './static/productcard.page'
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
