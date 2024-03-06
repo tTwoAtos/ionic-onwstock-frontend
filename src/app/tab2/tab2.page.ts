@@ -58,22 +58,26 @@ export class Tab2Page {
     })
   }
 
-  removeQuantity(product: ProductCard, index: number) {
-    product.quantity--
-    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
-    if (product.quantity === 0) removeBtn.disabled = true
-    // TODO: call service to update the quantity of the product
+  // TODO: call service to update the quantity of the product
     /*this.productService.updateProduct(product, productToCommunityID).subscribe(datas => {
       this.product = datas
     })*/
+  removeQuantity(product: ProductCard, index: number) {
+      product.quantity--
+      this.productcard[index].quantity = product.quantity
+      localStorage.setItem('productcard', JSON.stringify(this.productcard))
+      const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
+      if (product.quantity === 0) removeBtn.disabled = true
   }
 
-  addQuantity(product: ProductCard, index: number) {
-    product.quantity++
-    // TODO: call service to increase the quantity of the product
+  // TODO: call service to increase the quantity of the product
     /*this.productService.updateProduct(product, productToCommunityID).subscribe(datas => {
       this.product = datas
     })*/
+  addQuantity(product: ProductCard, index: number) {
+    product.quantity++
+    this.productcard[index].quantity = product.quantity
+    localStorage.setItem('productcard', JSON.stringify(this.productcard))
     const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
     removeBtn.disabled = false
   }
