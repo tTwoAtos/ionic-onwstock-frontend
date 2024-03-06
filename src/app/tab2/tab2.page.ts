@@ -59,9 +59,6 @@ export class Tab2Page {
   }
 
   // TODO: call service to update the quantity of the product
-    /*this.productService.updateProduct(product, productToCommunityID).subscribe(datas => {
-      this.product = datas
-    })*/
   removeQuantity(product: ProductCard, index: number) {
       product.quantity--
       this.productcard[index].quantity = product.quantity
@@ -74,9 +71,6 @@ export class Tab2Page {
   }
 
   // TODO: call service to increase the quantity of the product
-    /**
-     * * 
-     **/
   addQuantity(product: ProductCard, index: number) {
     product.quantity++
     this.productcard[index].quantity = product.quantity
