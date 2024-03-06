@@ -52,8 +52,9 @@ export class Tab2Page {
     this.productService.getProductsByCommunity(communityID).subscribe(listIDproducts => {
       this.cards = listIDproducts
 
-      for (let card in this.cards)
+      for (let i = 0; i < this.cards.length; i++) {
         this.pubImpl.regulateNumOfAds()
+      }
     })
   }
 
