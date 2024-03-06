@@ -1,8 +1,8 @@
-<ion-item color="medium" *ngIf="pubcard">
+<ion-item color="medium" *ngIf="pubData">
   <ion-thumbnail slot="start">
-      <img alt="Product" [src]="pubcard[0].src"/>
+    <img alt="Product" [src]="pubData.thumbnail" />
   </ion-thumbnail>
   <ion-text>
-    <h2>{{ pubcard[0].name }}</h2>
+    <h2>{{ pubData.name }}</h2>
   </ion-text>
 </ion-item>
