@@ -23,13 +23,13 @@
           <h3>{{ card.quantity }}</h3>
         </ion-label>
         <ion-fab vertical="top" horizontal="end" style="margin-top: 2.0625em;">
-          <ion-fab-button size="small" color="success">
-            <ion-icon name="add-sharp" (click)="addQuantity(card, i)"></ion-icon>
+          <ion-fab-button id="removeQte{{i}}" size="small" color="danger" [disabled]="card.quantity===0">
+            <ion-icon name="remove-sharp" (click)="removeQuantity(card, i)"></ion-icon>
           </ion-fab-button>
         </ion-fab>
         <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 2.0625em;">
-          <ion-fab-button id="removeQte{{i}}" size="small" color="danger" [disabled]="card.quantity===0">
-            <ion-icon name="remove-sharp" (click)="removeQuantity(card, i)"></ion-icon>
+          <ion-fab-button size="small" color="success">
+            <ion-icon name="add-sharp" (click)="addQuantity(card, i)"></ion-icon>
           </ion-fab-button>
         </ion-fab>
       </ion-item>
