@@ -65,7 +65,7 @@ export class Tab2Page {
   removeQuantity(product: ProductCard, index: number) {
       product.quantity--
       this.productcard[index].quantity = product.quantity
-      localStorage.setItem('productcard', JSON.stringify(this.productcard))
+      /*localStorage.setItem('productcard', JSON.stringify(this.productcard))*/
       const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
       if (product.quantity === 0) removeBtn.disabled = true
   }
@@ -77,7 +77,7 @@ export class Tab2Page {
   addQuantity(product: ProductCard, index: number) {
     product.quantity++
     this.productcard[index].quantity = product.quantity
-    localStorage.setItem('productcard', JSON.stringify(this.productcard))
+    /*localStorage.setItem('productcard', JSON.stringify(this.productcard))*/
     const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
     removeBtn.disabled = false
   }
