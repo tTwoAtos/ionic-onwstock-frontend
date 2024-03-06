@@ -58,14 +58,14 @@ export class Tab2Page {
     })
   }
 
-  removeQuantity(product: Product, index: number) {
+  removeQuantity(product: ProductCard, index: number) {
     product.quantity--
     const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
     if (product.quantity === 0) removeBtn.disabled = true
     // TODO: call service to update the quantity of the product
   }
 
-  addQuantity(product: Product, index: number) {
+  addQuantity(product: ProductCard, index: number) {
     product.quantity++
     // TODO: call service to increase the quantity of the product
     const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
