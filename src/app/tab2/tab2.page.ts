@@ -28,7 +28,7 @@ export class Tab2Page {
   ngOnInit() {
     this.productcard = productcard
     // this.generateCards()
-    this.pubImpl.getPubData()
+    // this.pubImpl.getPubData()
   }
 
   async scan(): Promise<void> {

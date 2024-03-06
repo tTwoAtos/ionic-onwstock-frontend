@@ -11,7 +11,7 @@
   </ion-card>
 
   <!-- Card of Porducts -->
-    <ion-list>
+    <ion-list color="light">
       <ion-item *ngFor="let card of productcard; let i = index">
         <ion-thumbnail slot="start">
           <img alt="Product" [src]="card.thumbnail" />
@@ -32,11 +32,10 @@
             <ion-icon name="add-sharp" (click)="addQuantity(card, i)"></ion-icon>
           </ion-fab-button>
         </ion-fab>
+        <!-- Pub HTML -->
+        <pub-page></pub-page>
       </ion-item>
     </ion-list>
-
-  <!-- Pub HTML -->
-  <pub-page></pub-page>
 
   <!-- Scan button  -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
