@@ -23,6 +23,12 @@ export class ProductsService implements IProductsInterfaceService {
   }
 
 
+  /**
+   * Saves a product using the given barcode.
+   *
+   * @param {string} barcode - The barcode of the product to be saved.
+   * @return {Observable<any>} The observable for the HTTP request.
+   */
   saveProduct(barcode: string): Observable<any> {
     const headers = new HttpHeaders()
     return this.http
@@ -62,6 +68,12 @@ export class ProductsService implements IProductsInterfaceService {
   }
 
 
+  /**
+   * Retrieves products by ID.
+   *
+   * @param {string} code - the ID of the product
+   * @return {Observable<any>} the products retrieved by ID
+   */
   getProductsByID(code: string): Observable<any> {
     const headers = new HttpHeaders()
       .set('ngrok-skip-browser-warning', 'true')
