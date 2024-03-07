@@ -26,9 +26,9 @@ export class Tab2Page {
   ) { }
 
   ngOnInit() {
-    this.productcard = productcard
-    // this.generateCards()
-    // this.pubImpl.getPubData()
+     /*this.productcard = productcard */
+    this.generateCards()
+    this.pubImpl.getPubData()
   }
 
   async scan(): Promise<void> {
@@ -59,7 +59,7 @@ export class Tab2Page {
   }
 
   // TODO: call service to update the quantity of the product
-  removeQuantity(product: ProductCard, index: number) {
+  removeQuantity(product: Product, index: number) {
       product.quantity--
       this.productcard[index].quantity = product.quantity
       /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
@@ -71,7 +71,7 @@ export class Tab2Page {
   }
 
   // TODO: call service to increase the quantity of the product
-  addQuantity(product: ProductCard, index: number) {
+  addQuantity(product: Product, index: number) {
     product.quantity++
     this.productcard[index].quantity = product.quantity
     /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
