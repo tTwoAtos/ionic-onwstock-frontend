@@ -32,7 +32,7 @@
   <ion-footer>
     <ion-button (click)="cancel()">Supprimer tout</ion-button>
     <div class="btn-modal-add">
-      <ion-fab-button (click)="barcode()">
+      <ion-fab-button (click)="getBarcode()">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
       <ion-toast [isOpen]="isToastOpen" [message]="toastMessage" [duration]="toastDuration"
@@ -54,7 +54,7 @@
           <ion-item>
             <!-- Add by code -->
             <ion-input type="text" style="color: white;" [counter]="true" maxlength="13" placeholder="Enter barcode"
-              fill="outline" [value]="eanByCode" >
+              fill="outline" [value]="eanByCode" required >
             </ion-input>
             <ion-button (click)="byCode()">OK</ion-button>
           </ion-item>

@@ -63,10 +63,13 @@ export class Tab1Page {
       }
     })
 
+    // Open modal or scan on init
+    this.getBarcode()
+
   }
 
   // Fonction de la modal pour l'ajout par input du eancode quand le scan fonctionne pas
-  public barcode() {
+  public getBarcode() {
     if (this.isAvailable) {
       this.byScan()
     } else {
@@ -79,6 +82,7 @@ export class Tab1Page {
 
   //Adding product to basket by code
   async byCode(): Promise<void> {
+    console.log(this.eanByCode)
     if(this.eanByCode.length === 13){
       this.toBasket(this.eanByCode)
       this.eanByCode = ""
