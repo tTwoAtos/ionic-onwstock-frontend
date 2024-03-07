@@ -50,11 +50,11 @@ export class ModalAddOrUpdateProductComponent implements OnInit {
   async confirm() {
     if (!this.form.valid) return
 
-    if (this.updateMode) {
+    /*if (this.updateMode) {
       this.productService.updateProduct(this.product, 10).subscribe(datas => {
         console.log(datas);
       })
-    }
+    }*/
 
     else {
       this.productService.addProduct(this.product, 'testCom').subscribe(datas => {
