@@ -25,10 +25,14 @@ export class Tab1Page {
   products: Product[] = []
   eanByCode: string
 
+  public listToDelete: string[] = []
+  public deleteMode: boolean = false
+
   public isToastOpen = false
   public toastMessage = "Are you sure , to empty the Basket ?"
   public toastDuration = 3000
   public isModalOpen: boolean = false
+  
 
   public product: Product
 
@@ -65,8 +69,11 @@ export class Tab1Page {
     })
 
     // Open modal or scan on init
-    this.getBarcode()
-
+    /*if(this.firstInit){
+          this.getBarcode()
+          this.firstInit=false
+    }*/
+    
   }
 
   // Fonction de la modal pour l'ajout par input du eancode quand le scan fonctionne pas
@@ -121,6 +128,32 @@ export class Tab1Page {
   }
 
 
+  // Fonction des boutons de modif quantite
+
+    removeQuantity(product: Product, index: number) {
+      product.quantity--
+      const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
+      if (product.quantity === 0) removeBtn.disabled = true
+    }
+  
+    addQuantity(product: Product, index: number) {
+      product.quantity++
+      const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
+      removeBtn.disabled = false
+    }
+    
+    getIdFromListToDelete(eancode: string) {
+      return this.listToDelete.includes(eancode)
+    }
+  
+    toggleSelection(eancode: string) {
+      if (!this.deleteMode) return
+  
+      if (this.listToDelete.includes(eancode))
+        this.listToDelete = this.listToDelete.filter(id => id != eancode)
+      else
+        this.listToDelete.push(eancode)
+    }
 
   // Fonction pour le Toaster 
   public dismissToast(): void {
@@ -135,6 +168,13 @@ export class Tab1Page {
     })
     // on vide le tableau
     this.products = [];
+  }
+
+  // Vidage du panier
+  async cancel() {
+    console.log("bonjour")
+    this.products=[]
+    this.hasProduct = false
   }
 
 
@@ -157,7 +197,5 @@ export class Tab1Page {
     await BarcodeScanner.installGoogleBarcodeScannerModule()
   }
 
-  async cancel() {
-    console.log("bonjour")
-  }
+
 }

@@ -15,12 +15,27 @@
 
   <ng-container *ngIf="hasProduct">
     <ion-list>
-      <ion-item *ngFor="let product of products">
+      <ion-item *ngFor="let product of products; let i = index" lines="none"
+      [color]="getIdFromListToDelete(product.eancode) ? 'light' : 'default'" (click)="toggleSelection(product.eancode)">
         <ion-thumbnail slot="start">
-          <img alt="Product Image" [src]="product.thumbnail" />
+          <img alt="Product" [src]="product.thumbnail" />
         </ion-thumbnail>
-        <ion-label>{{ product.name }}</ion-label>
-        <ion-label> - {{product.quantity}} + </ion-label>
+        <ion-label>
+          <h2>{{ product.name }}</h2>
+        </ion-label>
+        <ion-label>
+          <h3>{{ product.quantity }}</h3>
+        </ion-label>
+        <ion-fab vertical="top" horizontal="end" style="margin-top: 2.0625em;">
+          <ion-fab-button id="removeQte{{i}}" size="small" color="danger" [disabled]="product.quantity===0">
+            <ion-icon name="remove-sharp" (click)="removeQuantity(product, i)"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 2.0625em;">
+          <ion-fab-button size="small" color="success">
+            <ion-icon name="add-sharp" (click)="addQuantity(product, i)"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
       </ion-item>
     </ion-list>
   </ng-container>
