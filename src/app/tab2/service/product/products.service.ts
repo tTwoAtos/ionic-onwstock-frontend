@@ -87,7 +87,7 @@ export class ProductsService implements IProductsInterfaceService {
    * @param productToCommunityID - The ID of the product to community relationship.
    * @returns An Observable that emits the updated product.
    */
-  updateProduct(communityId: String, product: Product): Observable<any> {
+  updateProduct(communityId: string, product: Product): Observable<any> {
     const headers = new HttpHeaders()
     return this.http.put(environment.API_URL + `/product-to-community/${communityId}/${product.eancode}`, {
       qte: product.quantity
