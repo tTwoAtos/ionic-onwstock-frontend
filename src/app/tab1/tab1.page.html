@@ -53,8 +53,8 @@
         <ion-list class="modal-list">
           <ion-item>
             <!-- Add by code -->
-            <ion-input type="text" style="color: white;" [counter]="true" maxlength="13" placeholder="Enter barcode"
-              fill="outline" [value]="eanByCode" required >
+            <ion-input type="text" [counter]="true" maxlength="13" placeholder="Enter barcode"
+              fill="outline" [value]="eanByCode" [(ngModel)]="eanByCode" required >
             </ion-input>
             <ion-button (click)="byCode()">OK</ion-button>
           </ion-item>
