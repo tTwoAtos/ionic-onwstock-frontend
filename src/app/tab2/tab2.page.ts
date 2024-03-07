@@ -62,28 +62,13 @@ export class Tab2Page {
     })
   }
 
-  // TODO: call service to update the quantity of the product
-  removeQuantity(product: Product, index: number) {
+  removeQuantity(product: Product) {
     product.quantity--
-    // this.productcard[index].quantity = product.quantity
-    /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
-    this.product = updatedProduct
-      })
-    /*localStorage.setItem('productcard', JSON.stringify(this.productcard))*/
-    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
-    if (product.quantity === 0) removeBtn.disabled = true
+    if (product.quantity === 0) this.cards= this.cards.filter((prod)=> prod.eancode !== product.eancode)
   }
 
-  // TODO: call service to increase the quantity of the product
-  addQuantity(product: Product, index: number) {
+  addQuantity(product: Product) {
     product.quantity++
-    // this.product[index].quantity = product.quantity
-    /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
-      this.product = updatedProduct
-    })
-    /*localStorage.setItem('Product', JSON.stringify(this.Product))*/
-    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
-    removeBtn.disabled = false
   }
 
   togleDeleteMode() {

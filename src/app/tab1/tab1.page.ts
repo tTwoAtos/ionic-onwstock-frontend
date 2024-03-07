@@ -73,7 +73,7 @@ export class Tab1Page {
           this.getBarcode()
           this.firstInit=false
     }*/
-    
+
   }
 
   // Fonction de la modal pour l'ajout par input du eancode quand le scan fonctionne pas
@@ -131,15 +131,12 @@ export class Tab1Page {
   // Fonction des boutons de modif quantite
 
     removeQuantity(product: Product, index: number) {
-      product.quantity--
-      const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
-      if (product.quantity === 0) removeBtn.disabled = true
+      product.quantity--  
+      if (product.quantity === 0) this.products= this.products.filter((prod)=> prod.eancode !== product.eancode)
     }
   
     addQuantity(product: Product, index: number) {
       product.quantity++
-      const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
-      removeBtn.disabled = false
     }
     
     getIdFromListToDelete(eancode: string) {
@@ -172,7 +169,7 @@ export class Tab1Page {
 
   // Vidage du panier
   async cancel() {
-    console.log("bonjour")
+    //console.log("bonjour")
     this.products=[]
     this.hasProduct = false
   }
