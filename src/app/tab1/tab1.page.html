@@ -54,7 +54,7 @@
           <ion-item>
             <!-- Add by code -->
             <ion-input type="text" style="color: white;" [counter]="true" maxlength="13" placeholder="Enter barcode"
-              fill="outline">
+              fill="outline" [value]="eanByCode" >
             </ion-input>
             <ion-button (click)="byCode()">OK</ion-button>
           </ion-item>

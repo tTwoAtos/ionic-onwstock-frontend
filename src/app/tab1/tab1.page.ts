@@ -22,6 +22,7 @@ export class Tab1Page {
   hasProduct = false
   barcodes: Array<any> = []
   products: Product[] = []
+  eanByCode: string
 
   public isToastOpen = false
   public toastMessage = "Are you sure , to empty the Basket ?"
@@ -78,7 +79,10 @@ export class Tab1Page {
 
   //Adding product to basket by code
   async byCode(): Promise<void> {
-    // toBasket()
+    if(this.eanByCode.length === 13){
+      this.toBasket(this.eanByCode)
+      this.eanByCode = ""
+    }
   }
 
   //Adding product to basket by scan 
