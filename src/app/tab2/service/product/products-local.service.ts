@@ -1,7 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, lastValueFrom, take } from 'rxjs'
-import { environment } from 'src/environments/environment'
 import { Product } from '../../types/product.type'
 import { IProductsInterfaceService } from './interface/products.interface.service'
 import { LocalDatabaseService } from 'src/services/offline-storage/local-database.service'
@@ -97,7 +94,7 @@ export class ProductsServiceLocal implements IProductsInterfaceService {
       return localDbObjects;
     })
 
-    if (response.length > 0) {
+    if (response != undefined && response.length > 0) {
       return response
     }
 
@@ -122,7 +119,7 @@ export class ProductsServiceLocal implements IProductsInterfaceService {
 
     if (!product) {
 
-      const data = await this.productService.getProductByID(eancode)
+      const data = await this.productService.getProductsByID(eancode)
 
       service.addOrUpdate(service.PRODUCTS_STORE, data)
 
