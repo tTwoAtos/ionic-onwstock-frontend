@@ -6,6 +6,7 @@ import { Component } from '@angular/core'
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 import { ProductsService } from '../tab2/service/product/products.service'
 import { Product } from '../tab2/types/product.type'
+import { LocalDatabaseService } from 'src/services/offline-storage/local-database.service'
 
 @Component({
   selector: 'app-tab1',
@@ -27,7 +28,7 @@ export class Tab1Page {
 
   public product: Product
 
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService, private localDbService: LocalDatabaseService) { }
 
   ngOnInit() {
     BarcodeScanner.isSupported().then(async (result) => {
@@ -58,7 +59,7 @@ export class Tab1Page {
       this.barcodes.push(...barcodes)
     }
     if (this.barcodes.length > 0) {
-      this.productService.saveProduct(this.barcodes[0].rawValue).subscribe(
+      this.productService.saveProduct(this.barcodes[0].rawValue).then(
         datas => {
           this.product = datas
           this.isModalOpen = true

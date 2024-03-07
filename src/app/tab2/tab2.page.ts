@@ -6,6 +6,7 @@ import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 
 import { productcard } from './static/productcard.page'
 import ProductCard from './types/productcard.type'
+import { ProductsServiceLocal } from './service/product/products-local.service'
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -20,7 +21,7 @@ export class Tab2Page {
   isModalOpen: boolean = false
   productcard: typeof productcard
 
-  constructor(private productService: ProductsService, private pubImpl: PubPageComponent) { }
+  constructor(private productService: ProductsServiceLocal, private pubImpl: PubPageComponent) { }
 
   ngOnInit() {
     this.generateCards().then(() => {
@@ -56,7 +57,7 @@ export class Tab2Page {
       this.barcodes.push(...barcodes)
     }
     if (this.barcodes.length > 0) {
-      this.productService.saveProduct(this.barcodes[0].rawValue).subscribe(
+      this.productService.saveProduct(this.barcodes[0].rawValue).then(
         datas => {
           this.product = datas
           this.isModalOpen = true

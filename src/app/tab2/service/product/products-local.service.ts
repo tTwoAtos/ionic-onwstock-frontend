@@ -6,25 +6,27 @@ import { Product } from '../../types/product.type'
 import { IProductsInterfaceService } from './interface/products.interface.service'
 import { LocalDatabaseService } from 'src/services/offline-storage/local-database.service'
 import { LocalDatabaseInterfaceService } from 'src/services/offline-storage/local-database.interface.service'
+import { ProductsService } from './products.service'
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ProductsService implements IProductsInterfaceService {
+export class ProductsServiceLocal implements IProductsInterfaceService {
 
   private localDbServiceInstance: LocalDatabaseInterfaceService
 
-  constructor(private http: HttpClient) {
+
+  constructor(private productService: ProductsService) {
 
     this.localDbServiceInstance = LocalDatabaseService.getInstance()
   }
 
   async getProducts(): Promise<Product[]> {
-    const service = await this.localDbServiceInstance.setup()
+    const localDbService = await this.localDbServiceInstance.setup()
 
     // Products in local DB
-    const response = await service.getAll(service.PRODUCTS_STORE).then((localDbObjects) => {
+    const response = await localDbService.getAll(localDbService.PRODUCTS_STORE).then((localDbObjects) => {
       return localDbObjects
     })
 
@@ -32,31 +34,34 @@ export class ProductsService implements IProductsInterfaceService {
       return response.result
     }
 
-    const headers = new HttpHeaders()
-      .set('ngrok-skip-browser-warning', 'true')
-
-    const request = this.http.get(environment.API_LOCAL + '/products', { headers: headers }).pipe(take(100))
-    const data: Product[] = await lastValueFrom<any>(request)
+    const products = await this.productService.getProducts()
 
 
-    for (let i = 0; i < data.length; i++) {
-      let product = await service.get(service.PRODUCTS_STORE, data[i].eancode)
+    for (let i = 0; i < products.length; i++) {
+      let product = await localDbService.get(localDbService.PRODUCTS_STORE, products[i].eancode)
 
 
       if (!product)
-        service.addOrUpdate(service.PRODUCTS_STORE, data[i])
+        localDbService.addOrUpdate(localDbService.PRODUCTS_STORE, products[i])
     }
 
-    return data
+    return products
   }
 
 
   async saveProduct(barcode: string): Promise<any> {
-    const headers = new HttpHeaders()
-    return await this.http
-      .get(environment.API_LOCAL + '/products/' + barcode, {
-        headers: headers
+
+    const service = await this.localDbServiceInstance.setup()
+
+    let product = await service.get(service.PRODUCTS_STORE, barcode)
+
+    if (!product) {
+      this.productService.saveProduct(barcode).then((productData) => {
+        return productData
       })
+    }
+
+    return product
   }
 
   /**
@@ -68,18 +73,9 @@ export class ProductsService implements IProductsInterfaceService {
   async addProduct(product: Product, communityID: string): Promise<Product> {
     const localDbService = await this.localDbServiceInstance.setup()
 
-    const request = this.http
-      .post(environment.API_LOCAL + '/product-to-community/' + communityID, {
-        ...product,
-        productId: product.eancode,
-        qte: product.quantity
-      })
+    const data = await this.productService.addProduct(product, communityID)
 
-    const data: Product = await lastValueFrom<any>(request)
-
-    if (data) {
-      localDbService.addOrUpdate(this.localDbServiceInstance.PRODUCT_TO_COMMUNITY_STORE, product)
-    }
+    localDbService.addOrUpdate(this.localDbServiceInstance.PRODUCT_TO_COMMUNITY_STORE, product)
 
     return data
   }
@@ -95,22 +91,17 @@ export class ProductsService implements IProductsInterfaceService {
 
     const localDbService = await this.localDbServiceInstance.setup()
 
-    // !!! To check after merg when all method of ProductService is done
+    // !!! To check after merge when all method of ProductService is done
     const response = await localDbService.getProductsByCommunity(localDbService.PRODUCT_TO_COMMUNITY_STORE, communityId).then((localDbObjects) => {
-      console.log(localDbObjects);
 
-      //return localDbObjects;
+      return localDbObjects;
     })
 
-    // if (response.length > 0) {
-    //   return response
-    // }
+    if (response.length > 0) {
+      return response
+    }
 
-    const headers = new HttpHeaders()
-      .set('ngrok-skip-browser-warning', 'true')
-
-    const request = this.http.get(environment.API_LOCAL + `/product-to-community/${communityId}`, { headers: headers })
-    const data: any[] = await lastValueFrom<any>(request)
+    const data = await this.productService.getProductsByCommunity(communityId)
 
     for (let i = 0; i < data.length; i++) {
       const product = data[i];
@@ -125,19 +116,13 @@ export class ProductsService implements IProductsInterfaceService {
 
   async getProductByID(eancode: string): Promise<any> {
 
-    console.log("Test get products by id");
-
     const service = await this.localDbServiceInstance.setup()
 
     let product = await service.get(service.PRODUCTS_STORE, eancode)
 
     if (!product) {
 
-      const headers = new HttpHeaders()
-        .set('ngrok-skip-browser-warning', 'true')
-
-      const request = this.http.get(environment.API_LOCAL + `api/v1/products/${eancode}`, { headers: headers })
-      const data: Product = await lastValueFrom<any>(request)
+      const data = await this.productService.getProductByID(eancode)
 
       service.addOrUpdate(service.PRODUCTS_STORE, data)
 
@@ -155,12 +140,11 @@ export class ProductsService implements IProductsInterfaceService {
    * @returns An Observable that emits the updated product.
    */
   async updateProduct(product: Product, productToCommunityID: number): Promise<boolean> {
-    const request = this.http.put(environment.API_LOCAL + '/product-to-community/' + productToCommunityID, {
-      ...product,
-      productId: product.eancode,
-      qte: product.quantity
-    })
 
-    return false
+    let localDBresult = await this.localDbServiceInstance.addOrUpdateProductToCommunity(this.localDbServiceInstance.PRODUCT_TO_COMMUNITY_STORE, product, productToCommunityID.toString())
+
+    let result = await this.productService.updateProduct(product, productToCommunityID)
+
+    return localDBresult && result
   }
 }
