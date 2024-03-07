@@ -4,8 +4,6 @@ import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
 import { Product } from './types/product.type'
 
-import { productcard } from './static/productcard.page'
-import ProductCard from './types/productcard.type'
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -18,7 +16,8 @@ export class Tab2Page {
   barcodes: any[] = []
   product: Product
   isModalOpen: boolean = false
-  productcard: typeof productcard
+  public deleteMode: boolean = false
+  public listToDelete: string[] = []
 
   constructor(
     private productService: ProductsService,
@@ -26,12 +25,17 @@ export class Tab2Page {
   ) { }
 
   ngOnInit() {
-     /*this.productcard = productcard */
+    /*this.productcard = productcard */
     this.generateCards()
     this.pubImpl.getPubData()
   }
 
   async scan(): Promise<void> {
+    if (this.deleteMode) {
+      this.delete()
+      return
+    }
+
     if (this.isAvailable) {
       const { barcodes } = await BarcodeScanner.scan()
       this.barcodes.push(...barcodes)
@@ -60,25 +64,56 @@ export class Tab2Page {
 
   // TODO: call service to update the quantity of the product
   removeQuantity(product: Product, index: number) {
-      product.quantity--
-      this.productcard[index].quantity = product.quantity
-      /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
-      this.product = updatedProduct
-        })
-      /*localStorage.setItem('productcard', JSON.stringify(this.productcard))*/
-      const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
-      if (product.quantity === 0) removeBtn.disabled = true
+    product.quantity--
+    this.productcard[index].quantity = product.quantity
+    /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
+    this.product = updatedProduct
+      })
+    /*localStorage.setItem('productcard', JSON.stringify(this.productcard))*/
+    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
+    if (product.quantity === 0) removeBtn.disabled = true
   }
 
   // TODO: call service to increase the quantity of the product
   addQuantity(product: Product, index: number) {
     product.quantity++
-    this.productcard[index].quantity = product.quantity
+    this.product[index].quantity = product.quantity
     /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
       this.product = updatedProduct
     })
-    /*localStorage.setItem('productcard', JSON.stringify(this.productcard))*/
+    /*localStorage.setItem('Product', JSON.stringify(this.Product))*/
     const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
     removeBtn.disabled = false
+  }
+
+  togleDeleteMode() {
+    this.deleteMode = !this.deleteMode
+
+    if (!this.deleteMode)
+      this.listToDelete = []
+  }
+
+  delete() {
+    if (this.listToDelete.length == 0) return
+
+    this.productService.massDelete("testCom", this.listToDelete).then(() => {
+      console.log("please refresh the list");
+
+      this.generateCards()
+      this.togleDeleteMode()
+    })
+  }
+
+  getIdFromListToDelete(eancode: string) {
+    return this.listToDelete.includes(eancode)
+  }
+
+  toggleSelection(eancode: string) {
+    if (!this.deleteMode) return
+
+    if (this.listToDelete.includes(eancode))
+      this.listToDelete = this.listToDelete.filter(id => id != eancode)
+    else
+      this.listToDelete.push(eancode)
   }
 }
