@@ -53,18 +53,12 @@ export class LocalDatabaseService implements LocalDatabaseInterfaceService {
 
             // Setup the service at the initialization
             LocalDatabaseService._instance = new LocalDatabaseService()
-
-            //LocalDatabaseService._instance.setup()
         }
         else {
             console.log("instance before setup")
 
             // Setup the service at the initialization
             LocalDatabaseService._instance = new LocalDatabaseService()
-
-            //LocalDatabaseService._instance.setup()
-
-            console.log("instance after setup")
         }
 
         return LocalDatabaseService._instance
@@ -91,12 +85,9 @@ export class LocalDatabaseService implements LocalDatabaseInterfaceService {
                 this._db = event.target.result
 
                 resolve(this)
-
-                console.log("On success database")
             }
 
             this._request.onupgradeneeded = (event: any) => {
-                console.log("On upgrade database")
 
                 result = event.target.result
 
@@ -106,8 +97,6 @@ export class LocalDatabaseService implements LocalDatabaseInterfaceService {
                 this.productStore = this.createProductStore(event.target.result)
                 this.communityStore = this.createCommunityStore(event.target.result)
                 this.productToCommunityStore = this.createProductToCommunityStore(event.target.result)
-
-                console.log(this._db);
             }
 
         })
@@ -198,7 +187,6 @@ export class LocalDatabaseService implements LocalDatabaseInterfaceService {
     public addOrUpdateProductToCommunity(storeName: string, objectToAdd: any, communityID: string): Promise<boolean> {
 
         return new Promise((resolve, reject) => {
-            console.log(objectToAdd);
 
             const transaction = this._db.transaction(storeName, 'readwrite')
 

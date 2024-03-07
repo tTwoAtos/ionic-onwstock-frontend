@@ -13,8 +13,6 @@ export interface LocalDatabaseInterfaceService {
 
     get request(): IDBOpenDBRequest
 
-    //get instance(): Promise<LocalDatabaseService>
-
     setup(): Promise<LocalDatabaseService>
 
     addOrUpdate(storeName: string, objectToAdd: any): Promise<boolean>

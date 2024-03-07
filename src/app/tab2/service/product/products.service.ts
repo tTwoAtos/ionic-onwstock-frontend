@@ -95,7 +95,7 @@ export class ProductsService implements IProductsInterfaceService {
 
     const localDbService = await this.localDbServiceInstance.setup()
 
-    // !!!
+    // !!! To check after merg when all method of ProductService is done
     const response = await localDbService.getProductsByCommunity(localDbService.PRODUCT_TO_COMMUNITY_STORE, communityId).then((localDbObjects) => {
       console.log(localDbObjects);
 
@@ -129,24 +129,22 @@ export class ProductsService implements IProductsInterfaceService {
 
     const service = await this.localDbServiceInstance.setup()
 
-    const headers = new HttpHeaders()
-      .set('ngrok-skip-browser-warning', 'true')
+    let product = await service.get(service.PRODUCTS_STORE, eancode)
 
-    const request = this.http.get(environment.API_LOCAL + `api/v1/products/${eancode}`, { headers: headers })
-    const data: Product = await lastValueFrom<any>(request)
+    if (!product) {
 
-    console.log("Products : " + data);
+      const headers = new HttpHeaders()
+        .set('ngrok-skip-browser-warning', 'true')
 
+      const request = this.http.get(environment.API_LOCAL + `api/v1/products/${eancode}`, { headers: headers })
+      const data: Product = await lastValueFrom<any>(request)
 
-    // for (let i = 0; i < data.length; i++) {
-    //   let product = await service.get(service.PRODUCTS_STORE, data[i].eancode)
+      service.addOrUpdate(service.PRODUCTS_STORE, data)
 
+      return data
+    }
 
-    //   if (!product)
-    //     service.addOrUpdate(service.PRODUCTS_STORE, data[i])
-    // }
-
-    // return data
+    return product
   }
 
   /**
