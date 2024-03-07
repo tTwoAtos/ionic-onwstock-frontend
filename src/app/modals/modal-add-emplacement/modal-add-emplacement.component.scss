@@ -29,3 +29,8 @@ ion-text {
 .h-full {
     height: 100%;
 }
+
+ion-modal {
+    --height: "500px";
+    --width: "500px";
+}
