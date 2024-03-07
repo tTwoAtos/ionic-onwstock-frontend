@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/tab2/types/product.type';
 import { ProductsService } from './../../tab2/service/product/products.service';
+import { communityId } from 'src/const';
 @Component({
   selector: 'modal-add-or-update-product',
   templateUrl: './modal-add-or-update-product.component.html',
@@ -57,7 +58,7 @@ export class ModalAddOrUpdateProductComponent implements OnInit {
     }*/
 
     else {
-      this.productService.addProduct(this.product, 'testCom').subscribe(datas => {
+      this.productService.addProduct(this.product, communityId).subscribe(datas => {
         console.log(datas);
       })
     }

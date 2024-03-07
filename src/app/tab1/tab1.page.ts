@@ -6,6 +6,7 @@ import { Component } from '@angular/core'
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 import { ProductsService } from '../tab2/service/product/products.service'
 import { Product } from '../tab2/types/product.type'
+import { communityId } from 'src/const'
 
 @Component({
   selector: 'app-tab1',
@@ -130,7 +131,7 @@ export class Tab1Page {
   async validateBasket(): Promise<void> {
     console.log(this.products)
     this.products.forEach(product => {
-      this.productService.addProduct(product, 'testCom').subscribe()
+      this.productService.addProduct(product, communityId).subscribe()
     })
     // on vide le tableau
     this.products = [];

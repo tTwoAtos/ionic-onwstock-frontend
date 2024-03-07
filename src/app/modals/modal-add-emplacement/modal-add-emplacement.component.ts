@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { communityId } from 'src/const';
 import { EmplacementsService } from 'src/services/pub/emplacement.service';
 import { Emplacement } from 'src/types/emplacement.type';
 @Component({
@@ -43,7 +44,7 @@ export class ModalAddEmplacementComponent implements OnInit {
   async confirm() {
     if (!this.form.valid) return
 
-    this.emplacement.communityId = "testCom"
+    this.emplacement.communityId = communityId
     const res = await this.emplcacementService.add(this.emplacement).catch((error: any) => console.log(error))
 
     if (res) {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
+import { communityId } from 'src/const'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
 import { Product } from './types/product.type'
@@ -52,7 +53,6 @@ export class Tab2Page {
 
   generateCards() {
     let pubIndex: number = 0
-    const communityId = 'testCom'
     this.productService.getProductsByCommunity(communityId).subscribe(listIDproducts => {
       this.cards = listIDproducts
 
@@ -65,7 +65,7 @@ export class Tab2Page {
   // TODO: call service to update the quantity of the product
   removeQuantity(product: Product, index: number) {
     product.quantity--
-    this.productcard[index].quantity = product.quantity
+    // this.productcard[index].quantity = product.quantity
     /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
     this.product = updatedProduct
       })
@@ -77,7 +77,7 @@ export class Tab2Page {
   // TODO: call service to increase the quantity of the product
   addQuantity(product: Product, index: number) {
     product.quantity++
-    this.product[index].quantity = product.quantity
+    // this.product[index].quantity = product.quantity
     /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
       this.product = updatedProduct
     })
@@ -96,7 +96,7 @@ export class Tab2Page {
   delete() {
     if (this.listToDelete.length == 0) return
 
-    this.productService.massDelete("testCom", this.listToDelete).then(() => {
+    this.productService.massDelete(communityId, this.listToDelete).then(() => {
       console.log("please refresh the list");
 
       this.generateCards()

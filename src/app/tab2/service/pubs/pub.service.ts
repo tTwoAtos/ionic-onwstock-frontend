@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IPubInterfaceService } from './interface/pub.interface.service';
+import { communityId } from 'src/const';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,6 @@ export class PubService implements IPubInterfaceService {
    */
   getPub(): Observable<any> {
     const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true')
-    return this.http.get(environment.API_LOCAL + '/pubs/testCom', { headers: headers })
+    return this.http.get(environment.API_URL + '/pubs/'+communityId, { headers: headers })
   }
 }

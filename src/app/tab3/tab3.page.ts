@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { communityId } from 'src/const';
 import { EmplacementsService } from 'src/services/pub/emplacement.service';
 import { Emplacement } from 'src/types/emplacement.type';
 
@@ -17,9 +18,9 @@ export class Tab3Page {
   constructor(private emplacementService: EmplacementsService) { }
 
   ngOnInit() {
-    this.emplacementService.getAll("testCom").subscribe(async (datas) => {
+    this.emplacementService.getAll(communityId).subscribe(async (datas) => {
       for (let i = 0; i < datas.length; i++) {
-        datas[i].nbProducts = await this.emplacementService.count(datas[i].id, "testCom")
+        datas[i].nbProducts = await this.emplacementService.count(datas[i].id, communityId)
       }
 
       this.emplacements = datas
