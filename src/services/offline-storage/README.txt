@@ -7,5 +7,5 @@ Et agit à chaque opération sur un produit (ajout/suppression/modification/...)
 
 API :
 Doit se comporter comme une base de données en back
-Fonctionne en parallèle des opérations destinées au back-end 
+Fonctionne de paire avec les opérations destinées au back-end (ProductService)
 Donc doit posseder les opérations CRUD (Create - Read - Update - Delete)

@@ -50,13 +50,13 @@ export class ModalAddOrUpdateProductComponent implements OnInit {
     if (!this.form.valid) return
 
     if (this.updateMode) {
-      this.productService.updateProduct(this.product, 10).subscribe(datas => {
+      this.productService.updateProduct(this.product, 10).then(datas => {
         console.log(datas);
       })
     }
 
     else {
-      this.productService.addProduct(this.product, 'testCom').subscribe(datas => {
+      this.productService.addProduct(this.product, 'testCom').then(datas => {
         console.log(datas);
       })
     }
