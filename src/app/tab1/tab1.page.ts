@@ -130,12 +130,12 @@ export class Tab1Page {
 
   // Fonction des boutons de modif quantite
 
-    removeQuantity(product: Product, index: number) {
+    removeQuantity(product: Product) {
       product.quantity--  
       if (product.quantity === 0) this.products= this.products.filter((prod)=> prod.eancode !== product.eancode)
     }
   
-    addQuantity(product: Product, index: number) {
+    addQuantity(product: Product) {
       product.quantity++
     }
     
