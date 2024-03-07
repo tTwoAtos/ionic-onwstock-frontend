@@ -1,17 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          Lieux de stockage
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </ion-card>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-card *ngFor="let emplacement of emplacements" (click)="toggleSelection(emplacement.id)"
+    [color]="getIdFromListToDelete(emplacement.id) ? 'light' : 'default'">
+    <ion-card-content>
+      <ion-grid>
+        <ion-item lines="none" [color]="getIdFromListToDelete(emplacement.id) ? 'light' : 'default'">
+          <ion-row class="ion-justify-content-between">
+            <ion-col>
+              <ion-label>
+                <h2>{{ emplacement.name }}</h2>
+              </ion-label>
+            </ion-col>
+
+            <ion-col class="ion-text-end">
+              <h2>{{ emplacement?.nbProducts }}</h2>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Scan button  -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon [name]="!deleteMode ? 'add-outline' : 'checkmark-outline'" (click)="openModal()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Delete button -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start" (click)="togleDeleteMode()">
+    <ion-fab-button color="danger">
+      <ion-icon [name]="!deleteMode ? 'trash-outline' : 'close-outline'"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <modal-add-emplacement [isModalOpen]="isModalOpen$" (refreshList)="ngOnInit()" />
 </ion-content>

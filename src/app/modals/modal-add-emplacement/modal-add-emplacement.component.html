@@ -1,0 +1,38 @@
+<ion-content class="ion-padding" (click)="toggle()">
+    <ion-modal [isOpen]="isModalOpen.getValue()">
+        <ng-template>
+            <form [formGroup]="form" (submit)="confirm()" class="h-full">
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-title>Ajouter un lieu de stockage</ion-title>
+                    </ion-toolbar>
+                </ion-header>
+
+                <ion-content>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <ion-item>
+                                    <ion-label position="floating">Nom</ion-label>
+                                    <ion-input formControlName="name" [value]="emplacement.name"
+                                        [(ngModel)]="emplacement.name" required maxLength="255"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-content>
+            </form>
+
+            <ion-footer>
+                <ion-row>
+                    <ion-col text-center>
+                        <ion-button (click)="cancel()">Annuler</ion-button>
+                    </ion-col>
+                    <ion-col text-center class="ion-text-end">
+                        <ion-button (click)="confirm()">Ajouter</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-footer>
+        </ng-template>
+    </ion-modal>
+</ion-content>

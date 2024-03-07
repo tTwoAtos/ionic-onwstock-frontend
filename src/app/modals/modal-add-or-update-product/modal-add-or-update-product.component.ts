@@ -45,6 +45,7 @@ export class ModalAddOrUpdateProductComponent implements OnInit {
     this.form.reset()
 
     this.closeModal()
+    this.product = {} as Product
   }
   async confirm() {
     if (!this.form.valid) return

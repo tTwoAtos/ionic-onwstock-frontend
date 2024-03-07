@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
+import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
 import { Product } from './types/product.type'
-import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 
 import { productcard } from './static/productcard.page'
 import ProductCard from './types/productcard.type'
