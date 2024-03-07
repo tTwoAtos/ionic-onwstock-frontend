@@ -78,31 +78,7 @@ export class Tab1Page {
 
   //Adding product to basket by code
   async byCode(): Promise<void> {
-    //
-    /*
-    this.productService.saveProduct(var).subscribe(datas => {
-      this.product = datas
-    })
-    this.products.push(this.product)
-    this.hasProduct = true
-
-    if (input.length == 13) {
-      this.products.forEach(product => {
-        if (input.value === product.eancode) {
-          product.quantity++
-          this.isNewProduct = false
-        }
-      });
-      if (this.isNewProduct) {
-        this.productService.saveProduct(this.barcodes[0].rawValue).subscribe(datas => {
-          this.products.push(datas)
-          this.products[this.products.length - 1].quantity = 1
-        })
-      }
-      this.barcodes = []
-      this.hasProduct = true
-      this.isNewProduct = true
-    }*/
+    // toBasket()
   }
 
   //Adding product to basket by scan 
@@ -112,23 +88,27 @@ export class Tab1Page {
       this.barcodes.push(...barcodes)
 
       if (this.barcodes.length > 0) {
-        this.products.forEach(product => {
-          if (this.barcodes[0].rawValue === product.eancode) {
-            product.quantity++
-            this.isNewProduct = false
-          }
-        });
-        if (this.isNewProduct) {
-          this.productService.saveProduct(this.barcodes[0].rawValue).subscribe(datas => {
-            this.products.push(datas)
-            this.products[this.products.length - 1].quantity = 1
-          })
-        }
+        this.toBasket(this.barcodes[0].rawValue)
         this.barcodes = []
-        this.hasProduct = true
-        this.isNewProduct = true
       }
     }
+  }
+
+  async toBasket(barcode: string){
+    this.products.forEach(product => {
+      if (barcode === product.eancode) {
+        product.quantity++
+        this.isNewProduct = false
+      }
+    });
+    if (this.isNewProduct) {
+      this.productService.saveProduct(barcode).subscribe(datas => {
+        this.products.push(datas)
+        this.products[this.products.length - 1].quantity = 1
+      })
+    }
+    this.hasProduct = true
+    this.isNewProduct = true
   }
 
 

@@ -6,7 +6,6 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab2Page } from './tab2.page'
 
 import { PubPageComponent as PubPage } from './pub/pub.component'
-import { ModalsModule } from '../modals/modals'
 import { Tab2PageRoutingModule } from './tab2-routing.module'
 
 @NgModule({
@@ -15,8 +14,7 @@ import { Tab2PageRoutingModule } from './tab2-routing.module'
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule,
-    ModalsModule
+    Tab2PageRoutingModule
   ],
 
   providers: [

@@ -38,15 +38,15 @@ export class ProductsService implements IProductsInterfaceService {
    * @returns An Observable that emits the response from the server.
    */
   addProduct(product: Product, communityId: string): Observable<any> {
-    console.log(product, communityId)
+    //console.log(product, communityId)
+    const headers = new HttpHeaders()
     return this.http
       .post(environment.API_LOCAL + `/product-to-community/${communityId}`, {
-        body: {
           productId: product.eancode,
           communityId: communityId,
           qte: product.quantity
-        }
-      })
+      },{headers: headers}
+      )
   }
 
 
@@ -75,11 +75,10 @@ export class ProductsService implements IProductsInterfaceService {
    * @param productToCommunityID - The ID of the product to community relationship.
    * @returns An Observable that emits the updated product.
    */
-  updateProduct(product: Product, productToCommunityID: number): Observable<any> {
-    return this.http.put(environment.API_LOCAL + '/product-to-community/' + productToCommunityID, {
-      ...product,
-      productId: product.eancode,
+  updateProduct(communityId:String, product: Product): Observable<any> {
+    const headers = new HttpHeaders()
+    return this.http.put(environment.API_LOCAL + `/product-to-community/${communityId}/${product.eancode}`, {
       qte: product.quantity
-    })
+    },{headers: headers})
   }
 }
