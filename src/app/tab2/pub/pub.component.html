@@ -1,16 +1,8 @@
-<ion-content>
-  <ion-card *ngIf="pubData">
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img alt="Product" [src]="pubData.thumbnail" />
-          </ion-thumbnail>
-          <ion-text>
-            <h2>{{ pubData.name }}</h2>
-          </ion-text>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+<ion-item color="medium" *ngIf="pubData">
+  <ion-thumbnail slot="start">
+    <img alt="Product" [src]="pubData.thumbnail" />
+  </ion-thumbnail>
+  <ion-text>
+    <h2>{{ pubData.name }}</h2>
+  </ion-text>
+</ion-item>

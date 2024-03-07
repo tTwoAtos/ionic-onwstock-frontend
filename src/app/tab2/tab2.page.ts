@@ -7,6 +7,7 @@ import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 import { productcard } from './static/productcard.page'
 import ProductCard from './types/productcard.type'
 import { ProductsServiceLocal } from './service/product/products-local.service'
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -92,18 +93,27 @@ export class Tab2Page {
     })
   }
 
-  removeQuantity() {
-    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById('removeBtn') as HTMLIonFabButtonElement
-    for (let product of this.productcard)
-      product.quantity--
-    if (this.product.quantity === 0) {
-      removeBtn.disabled = true
-    }
-
+  // TODO: call service to update the quantity of the product
+  removeQuantity(product: ProductCard, index: number) {
+    product.quantity--
+    this.productcard[index].quantity = product.quantity
+    /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
+    this.product = updatedProduct
+      })
+    /*localStorage.setItem('productcard', JSON.stringify(this.productcard))*/
+    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
+    if (product.quantity === 0) removeBtn.disabled = true
   }
 
-  addQuantity() {
-    for (let product of this.productcard)
-      product.quantity++
+  // TODO: call service to increase the quantity of the product
+  addQuantity(product: ProductCard, index: number) {
+    product.quantity++
+    this.productcard[index].quantity = product.quantity
+    /* this.productService.updateProduct(product, productToCommunityID).subscribe(updatedProduct => {
+      this.product = updatedProduct
+    })
+    /*localStorage.setItem('productcard', JSON.stringify(this.productcard))*/
+    const removeBtn: HTMLIonFabButtonElement | null = document.getElementById(`removeQte${index}`) as HTMLIonFabButtonElement
+    removeBtn.disabled = false
   }
 }

@@ -1,31 +1,66 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Scan product
-    </ion-title>
+    <div class="toolbar">
+      <ion-title>
+        Basket
+      </ion-title>
+      <ion-button (click)="validateBasket()">
+        <ion-icon name="checkmark-outline" style="color: white" size="large"></ion-icon>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ng-container *ngIf="isAvailable">
+
+  <ng-container *ngIf="hasProduct">
     <ion-list>
-      <ion-item *ngFor="let barcode of barcodes">
-        <ion-label>{{ barcode.rawValue }} [{{ barcode.format }}]</ion-label>
-        <ion-label>{{product}}</ion-label>
+      <ion-item *ngFor="let product of products">
+        <ion-thumbnail slot="start">
+          <img alt="Product Image" [src]="product.thumbnail" />
+        </ion-thumbnail>
+        <ion-label>{{ product.name }}</ion-label>
+        <ion-label> - {{product.quantity}} + </ion-label>
       </ion-item>
     </ion-list>
-    <!-- Scan button -->
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button (click)="scan()">
-        <ion-icon name="scan"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
   </ng-container>
-  <ion-toast [isOpen]="isToastOpen" [message]="toastMessage" [duration]="toastDuration"
-    (didDismiss)="dismissToast()"></ion-toast>
-</ion-content>
 
-<ion-content>
-  <modal-add-or-update-product [product]="product" [isModalOpen]="isModalOpen">
-  </modal-add-or-update-product>
+
+  <!-- Pannel button footer-->
+  <!-- Scan button -->
+
+  <ion-footer>
+    <ion-button (click)="cancel()">Supprimer tout</ion-button>
+    <div class="btn-modal-add">
+      <ion-fab-button (click)="barcode()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-toast [isOpen]="isToastOpen" [message]="toastMessage" [duration]="toastDuration"
+        (didDismiss)="dismissToast()"></ion-toast>
+    </div>
+  </ion-footer>
+
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <div class="toolbar">
+            <ion-title>Scan</ion-title>
+            <ion-fab-button size="small" (click)="modalClose()">X</ion-fab-button>
+          </div>
+        </ion-toolbar>
+        <ion-list class="modal-list">
+          <ion-item>
+            <!-- Add by code -->
+            <ion-input type="text" style="color: white;" [counter]="true" maxlength="13" placeholder="Enter barcode"
+              fill="outline">
+            </ion-input>
+            <ion-button (click)="byCode()">OK</ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>

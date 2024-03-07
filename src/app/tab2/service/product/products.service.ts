@@ -62,27 +62,22 @@ export class ProductsService implements IProductsInterfaceService {
   /**
    * Adds a product to a community.
    * @param product - The product to be added.
-   * @param communityID - The ID of the community.
+   * @param communityId - The ID of the community.
    * @returns An Observable that emits the response from the server.
    */
-  async addProduct(product: Product, communityID: string): Promise<Product> {
-    const localDbService = await this.localDbServiceInstance.setup()
 
-    const request = this.http
-      .post(environment.API_LOCAL + '/product-to-community/' + communityID, {
-        ...product,
-        productId: product.eancode,
-        qte: product.quantity
+  async addProduct(product: Product, communityId: string): Promise<any> {
+    console.log(product, communityId)
+    return this.http
+      .post(environment.API_LOCAL + `/product-to-community/${communityId}`, {
+        body: {
+          productId: product.eancode,
+          communityId: communityId,
+          qte: product.quantity
+        }
       })
-
-    const data: Product = await lastValueFrom<any>(request)
-
-    if (data) {
-      localDbService.addOrUpdate(this.localDbServiceInstance.PRODUCT_TO_COMMUNITY_STORE, product)
-    }
-
-    return data
   }
+
 
   /**
    * Retrieves products by community ID.
@@ -123,28 +118,11 @@ export class ProductsService implements IProductsInterfaceService {
     return data
   }
 
-  async getProductByID(eancode: string): Promise<any> {
 
-    console.log("Test get products by id");
-
-    const service = await this.localDbServiceInstance.setup()
-
-    let product = await service.get(service.PRODUCTS_STORE, eancode)
-
-    if (!product) {
-
-      const headers = new HttpHeaders()
-        .set('ngrok-skip-browser-warning', 'true')
-
-      const request = this.http.get(environment.API_LOCAL + `api/v1/products/${eancode}`, { headers: headers })
-      const data: Product = await lastValueFrom<any>(request)
-
-      service.addOrUpdate(service.PRODUCTS_STORE, data)
-
-      return data
-    }
-
-    return product
+  async getProductsByID(code: string): Promise<any> {
+    const headers = new HttpHeaders()
+      .set('ngrok-skip-browser-warning', 'true')
+    return this.http.get(environment.API_LOCAL + `/products/${code}`, { headers: headers })
   }
 
   /**
