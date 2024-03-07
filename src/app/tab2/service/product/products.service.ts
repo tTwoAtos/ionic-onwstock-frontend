@@ -34,17 +34,21 @@ export class ProductsService implements IProductsInterfaceService {
   /**
    * Adds a product to a community.
    * @param product - The product to be added.
-   * @param communityID - The ID of the community.
+   * @param communityId - The ID of the community.
    * @returns An Observable that emits the response from the server.
    */
-  addProduct(product: Product, communityID: string): Observable<any> {
+  addProduct(product: Product, communityId: string): Observable<any> {
+    console.log(product, communityId)
     return this.http
-      .post(environment.API_LOCAL + '/product-to-community/' + communityID, {
-        ...product,
-        productId: product.eancode,
-        qte: product.quantity
+      .post(environment.API_LOCAL + `/product-to-community/${communityId}`, {
+        body: {
+          productId: product.eancode,
+          communityId: communityId,
+          qte: product.quantity
+        }
       })
   }
+
 
   /**
    * Retrieves products by community ID.
@@ -56,6 +60,7 @@ export class ProductsService implements IProductsInterfaceService {
       .set('ngrok-skip-browser-warning', 'true')
     return this.http.get(environment.API_LOCAL + `/product-to-community/${communityId}`, { headers: headers })
   }
+
 
   getProductsByID(code: string): Observable<any> {
     const headers = new HttpHeaders()

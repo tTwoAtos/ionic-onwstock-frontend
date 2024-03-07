@@ -24,8 +24,8 @@ export class Tab2Page {
 
   generateCards() {
     let pubIndex: number = 0
-    const communityID = 'testCom'
-    this.productService.getProductsByCommunity(communityID).subscribe(listIDproducts => {
+    const communityId = 'testCom'
+    this.productService.getProductsByCommunity(communityId).subscribe(listIDproducts => {
       this.cards = listIDproducts
 
       for (let i = 0; i < this.cards.length; i++) {
