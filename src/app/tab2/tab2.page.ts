@@ -59,8 +59,6 @@ export class Tab2Page {
       this.listToDelete.push(product.eancode)
       this.productService.massDelete(communityId, this.listToDelete)
       this.listToDelete = []
-      
-      this.generateCards()
 
     }else{
       this.updateProductBdd(product)
@@ -85,15 +83,11 @@ export class Tab2Page {
 
       this.productService.massDelete(communityId, this.listToDelete).then(() => {
         //console.log("please refresh the list");
-        this.generateCards()
         this.togleDeleteMode()
       })
     }
   }
 
-  refresh(){
-    this.generateCards()
-  }
 
   getIdFromListToDelete(eancode: string) {
     return this.listToDelete.includes(eancode)
