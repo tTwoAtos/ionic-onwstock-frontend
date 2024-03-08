@@ -47,7 +47,7 @@ export class ProductsService implements IProductsInterfaceService {
     //console.log(product, communityId)
     const headers = new HttpHeaders()
     return this.http
-      .post(environment.API_LOCAL + `/product-to-community/${communityId}`, {
+      .post(environment.API_URL + `/product-to-community/${communityId}`, {
         productId: product.eancode,
         communityId: communityId,
         qte: product.quantity
