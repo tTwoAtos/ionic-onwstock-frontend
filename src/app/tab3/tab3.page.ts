@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { communityId } from 'src/const';
-import { EmplacementsService } from 'src/services/pub/emplacement.service';
+import { EmplacementsService } from 'src/services/emplacement.service';
 import { Emplacement } from 'src/types/emplacement.type';
 
 @Component({
