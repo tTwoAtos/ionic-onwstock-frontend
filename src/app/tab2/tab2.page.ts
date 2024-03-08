@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 import { communityId } from 'src/const'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
@@ -13,8 +12,6 @@ import { Product } from './types/product.type'
 
 export class Tab2Page {
   cards: Product[] = []
-  isAvailable = true
-  barcodes: any[] = []
   product: Product
   isModalOpen: boolean = false
   public deleteMode: boolean = false
@@ -31,24 +28,8 @@ export class Tab2Page {
     this.pubImpl.getPubData()
   }
 
-  async scan(): Promise<void> {
-    if (this.deleteMode) {
-      this.delete()
-      return
-    }
-
-    if (this.isAvailable) {
-      const { barcodes } = await BarcodeScanner.scan()
-      this.barcodes.push(...barcodes)
-    }
-    if (this.barcodes.length > 0) {
-      this.productService.saveProduct(this.barcodes[0].rawValue).subscribe(
-        datas => {
-          this.product = datas
-          this.isModalOpen = true
-        }
-      )
-    }
+  towardBasket(){
+    location.href="/tabs/tab1"
   }
 
   generateCards() {
@@ -62,14 +43,31 @@ export class Tab2Page {
     })
   }
 
-  removeQuantity(product: Product) {
-    product.quantity--
-    if (product.quantity === 0) this.cards= this.cards.filter((prod)=> prod.eancode !== product.eancode)
-  }
 
+  // Update factor
   addQuantity(product: Product) {
     product.quantity++
+    this.updateProductBdd(product)
   }
+  removeQuantity(product: Product) {
+    product.quantity--
+    if (product.quantity === 0){ 
+      this.cards= this.cards.filter((prod)=> prod.eancode !== product.eancode)
+
+      this.listToDelete.push(product.eancode)
+      this.delete()
+      this.listToDelete = []
+
+    }else{
+      this.updateProductBdd(product)
+    }
+  }
+
+  async updateProductBdd(prod : Product): Promise<void>{
+    this.productService.updateProduct(communityId,this.product)
+  }
+
+
 
   togleDeleteMode() {
     this.deleteMode = !this.deleteMode
@@ -79,14 +77,14 @@ export class Tab2Page {
   }
 
   delete() {
-    if (this.listToDelete.length == 0) return
+    if (this.listToDelete.length > 0){
 
-    this.productService.massDelete(communityId, this.listToDelete).then(() => {
-      console.log("please refresh the list");
-
-      this.generateCards()
-      this.togleDeleteMode()
+      this.productService.massDelete(communityId, this.listToDelete).then(() => {
+        console.log("please refresh the list");
+        this.generateCards()
+        this.togleDeleteMode()
     })
+  }
   }
 
   getIdFromListToDelete(eancode: string) {

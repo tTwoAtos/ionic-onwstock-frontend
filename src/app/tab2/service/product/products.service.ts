@@ -94,6 +94,13 @@ export class ProductsService implements IProductsInterfaceService {
     }, { headers: headers })
   }
 
+  /**
+   * Deletes multiple products associated with a community.
+   *
+   * @param {string} productToCommunityID - the ID of the product to community mapping
+   * @param {string[]} productIds - an array of product IDs to be deleted
+   * @return {Promise<any>} a Promise that resolves with the result of the deletion request
+   */
   massDelete(productToCommunityID: string, productIds: string[]): Promise<any> {
     const headers = new HttpHeaders()
       .set('ngrok-skip-browser-warning', 'true')

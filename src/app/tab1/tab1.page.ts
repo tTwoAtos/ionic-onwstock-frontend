@@ -25,13 +25,12 @@ export class Tab1Page {
   products: Product[] = []
   eanByCode: string
 
-  public listToDelete: string[] = []
-  public deleteMode: boolean = false
-
   public isToastOpen = false
   public toastMessage = "Are you sure , to empty the Basket ?"
   public toastDuration = 3000
   public isModalOpen: boolean = false
+  public deleteMode: boolean = false
+  public listToDelete: string[] = []
   
 
   public product: Product
@@ -130,28 +129,15 @@ export class Tab1Page {
 
   // Fonction des boutons de modif quantite
 
-    removeQuantity(product: Product) {
+  removeQuantity(product: Product) {
       product.quantity--  
       if (product.quantity === 0) this.products= this.products.filter((prod)=> prod.eancode !== product.eancode)
-    }
+  }
   
-    addQuantity(product: Product) {
+  addQuantity(product: Product) {
       product.quantity++
-    }
+  }
     
-    getIdFromListToDelete(eancode: string) {
-      return this.listToDelete.includes(eancode)
-    }
-  
-    toggleSelection(eancode: string) {
-      if (!this.deleteMode) return
-  
-      if (this.listToDelete.includes(eancode))
-        this.listToDelete = this.listToDelete.filter(id => id != eancode)
-      else
-        this.listToDelete.push(eancode)
-    }
-
   // Fonction pour le Toaster 
   public dismissToast(): void {
     this.isToastOpen = false
@@ -174,8 +160,21 @@ export class Tab1Page {
     this.hasProduct = false
   }
 
+  getIdFromListToDelete(eancode: string) {
+    return this.listToDelete.includes(eancode)
+  }
 
-  //Fon 
+  toggleSelection(eancode: string) {
+    if (!this.deleteMode) return
+
+    if (this.listToDelete.includes(eancode))
+      this.listToDelete = this.listToDelete.filter(id => id != eancode)
+    else
+      this.listToDelete.push(eancode)
+  }
+
+
+  //Get permissions
   private async _requestCameraPermission(): Promise<boolean> {
     const { camera } = await BarcodeScanner.checkPermissions()
     return camera === 'granted' || camera === 'limited'
