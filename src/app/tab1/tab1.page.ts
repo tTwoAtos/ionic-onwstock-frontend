@@ -28,8 +28,6 @@ export class Tab1Page{
   public isModalOpen: boolean = false
   public product: Product
 
-  @Output() refreshList: EventEmitter<any> = new EventEmitter<any>();
-
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
@@ -140,6 +138,7 @@ export class Tab1Page{
     })
     // on vide le tableau
     this.products = [];
+    location.href="/tabs/tab2"
   }
 
   // Vidage du panier
