@@ -27,7 +27,7 @@ export class Tab2Page {
     this.generateCards()
     this.pubImpl.getPubData()
   }
-
+  
   towardBasket(){
     location.href="/tabs/tab1"
   }

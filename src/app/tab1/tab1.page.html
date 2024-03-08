@@ -45,13 +45,14 @@
 
   <ion-footer>
     <ion-button (click)="cancel()">Vide le panier</ion-button>
-    <div class="btn-modal-add">
-      <ion-fab-button (click)="getBarcode()">
+    <ng-container *ngIf="isAvailable">
+      <ion-fab-button (click)="byCode()">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
-      <ion-toast [isOpen]="isToastOpen" [message]="toastMessage" [duration]="toastDuration"
-        (didDismiss)="dismissToast()"></ion-toast>
-    </div>
+    </ng-container>
+    <ion-fab-button (click)="getBarcode()">
+      <ion-icon name="Scan"></ion-icon>
+    </ion-fab-button>
   </ion-footer>
 
 
