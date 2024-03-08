@@ -29,8 +29,7 @@ export class Tab1Page {
   public toastMessage = "Are you sure , to empty the Basket ?"
   public toastDuration = 3000
   public isModalOpen: boolean = false
-  public deleteMode: boolean = false
-  public listToDelete: string[] = []
+
   
 
   public product: Product
@@ -89,7 +88,7 @@ export class Tab1Page {
 
   //Adding product to basket by code
   async byCode(): Promise<void> {
-    console.log(this.eanByCode)
+    //console.log(this.eanByCode)
     if(this.eanByCode.length === 13){
       this.toBasket(this.eanByCode)
       this.eanByCode = ""
@@ -145,7 +144,7 @@ export class Tab1Page {
 
   // Validation du panier
   async validateBasket(): Promise<void> {
-    console.log(this.products)
+    //console.log(this.products)
     this.products.forEach(product => {
       this.productService.addProduct(product, communityId).subscribe()
     })
@@ -158,19 +157,6 @@ export class Tab1Page {
     //console.log("bonjour")
     this.products=[]
     this.hasProduct = false
-  }
-
-  getIdFromListToDelete(eancode: string) {
-    return this.listToDelete.includes(eancode)
-  }
-
-  toggleSelection(eancode: string) {
-    if (!this.deleteMode) return
-
-    if (this.listToDelete.includes(eancode))
-      this.listToDelete = this.listToDelete.filter(id => id != eancode)
-    else
-      this.listToDelete.push(eancode)
   }
 
 

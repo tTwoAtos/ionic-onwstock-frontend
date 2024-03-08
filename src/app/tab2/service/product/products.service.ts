@@ -52,7 +52,7 @@ export class ProductsService implements IProductsInterfaceService {
         communityId: communityId,
         qte: product.quantity
       },
-        { headers: headers })
+      { headers: headers })
   }
 
 
@@ -91,7 +91,8 @@ export class ProductsService implements IProductsInterfaceService {
     const headers = new HttpHeaders()
     return this.http.put(environment.API_URL + `/product-to-community/${communityId}/${product.eancode}`, {
       qte: product.quantity
-    }, { headers: headers })
+    },
+    { headers: headers })
   }
 
   /**

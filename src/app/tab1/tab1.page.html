@@ -15,8 +15,7 @@
 
   <ng-container *ngIf="hasProduct">
     <ion-list>
-      <ion-item *ngFor="let product of products; let i = index" lines="none"
-      [color]="getIdFromListToDelete(product.eancode) ? 'light' : 'default'" (click)="toggleSelection(product.eancode)">
+      <ion-item *ngFor="let product of products; let i = index" lines="none">
         <ion-thumbnail slot="start">
           <img alt="Product" [src]="product.thumbnail" />
         </ion-thumbnail>
@@ -45,7 +44,7 @@
   <!-- Scan button -->
 
   <ion-footer>
-    <ion-button (click)="cancel()">Supprimer tout</ion-button>
+    <ion-button (click)="cancel()">Vide le panier</ion-button>
     <div class="btn-modal-add">
       <ion-fab-button (click)="getBarcode()">
         <ion-icon name="add-outline"></ion-icon>
