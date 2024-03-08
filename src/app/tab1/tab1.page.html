@@ -26,7 +26,7 @@
           <h3>{{ product.quantity }}</h3>
         </ion-label>
         <ion-fab vertical="top" horizontal="end" style="margin-top: 2.0625em;">
-          <ion-fab-button id="removeQte{{i}}" size="small" color="danger" [disabled]="product.quantity===0">
+          <ion-fab-button id="removeQte{{i}}" size="small" color="danger">
             <ion-icon name="remove-sharp" (click)="removeQuantity(product)"></ion-icon>
           </ion-fab-button>
         </ion-fab>

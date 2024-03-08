@@ -9,7 +9,6 @@
 <ion-content [fullscreen]="true">
   <!-- Card of Porducts -->
   <ion-list>
-    <div>
       <ion-item *ngFor="let card of cards; let i = index" lines="none"
         [color]="getIdFromListToDelete(card.eancode) ? 'light' : 'default'" (click)="toggleSelection(card.eancode)">
         <ion-thumbnail slot="start">
@@ -22,7 +21,7 @@
           <h3>{{ card.quantity }}</h3>
         </ion-label>
         <ion-fab vertical="top" horizontal="end" style="margin-top: 2.0625em;">
-          <ion-fab-button id="removeQte{{i}}" size="small" color="danger" [disabled]="card.quantity===0">
+          <ion-fab-button id="removeQte{{i}}" size="small" color="danger">
             <ion-icon name="remove-sharp" (click)="removeQuantity(card)"></ion-icon>
           </ion-fab-button>
         </ion-fab>
@@ -32,7 +31,6 @@
           </ion-fab-button>
         </ion-fab>
       </ion-item>
-    </div>
   </ion-list>
   <pub-page></pub-page>
 
