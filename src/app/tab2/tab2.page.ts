@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input, SimpleChanges } from '@angular/core'
 import { communityId } from 'src/const'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
@@ -11,11 +11,14 @@ import { Product } from './types/product.type'
 })
 
 export class Tab2Page {
+
   cards: Product[] = []
   product: Product
   isModalOpen: boolean = false
   public deleteMode: boolean = false
   public listToDelete: string[] = []
+
+  @Input() hasValidateBasket: Boolean = false;
 
   constructor(
     private productService: ProductsService,
@@ -26,6 +29,13 @@ export class Tab2Page {
     /*this.productcard = productcard */
     this.generateCards()
     this.pubImpl.getPubData()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void{
+    if(this.hasValidateBasket){
+      this.generateCards()
+      this.pubImpl.getPubData()
+    }
   }
   
   towardBasket(){
@@ -71,7 +81,7 @@ export class Tab2Page {
   //Suppression mod
   togleDeleteMode() {
     this.deleteMode = !this.deleteMode
-    
+
     if (!this.deleteMode)
       this.listToDelete = []
   }

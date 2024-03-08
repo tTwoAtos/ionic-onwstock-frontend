@@ -45,14 +45,14 @@
 
   <ion-footer>
     <ion-button (click)="cancel()">Vide le panier</ion-button>
-    <ng-container >
+    <ng-container>
       <ion-fab-button (click)="modalOpen()" *ngIf="isAvailable">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
+      <ion-fab-button (click)="getBarcode()">
+        <ion-icon name="Scan"></ion-icon>
+      </ion-fab-button>
     </ng-container>
-    <ion-fab-button (click)="getBarcode()">
-      <ion-icon name="Scan"></ion-icon>
-    </ion-fab-button>
   </ion-footer>
 
 

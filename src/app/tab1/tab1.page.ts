@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 /**
  * Specifics barcode
@@ -7,6 +7,7 @@ import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 import { ProductsService } from '../tab2/service/product/products.service'
 import { Product } from '../tab2/types/product.type'
 import { communityId } from 'src/const'
+import { BehaviorSubject } from 'rxjs'
 
 @Component({
   selector: 'app-tab1',
@@ -15,6 +16,8 @@ import { communityId } from 'src/const'
 })
 export class Tab1Page{
 
+  @Input() hasValidateBasket: Boolean = false;
+  
   /**
    * Wether barcode is available or not defaut false
    */
@@ -138,6 +141,7 @@ export class Tab1Page{
     })
     // on vide le tableau
     this.products = [];
+    this.hasValidateBasket=true
     location.href="/tabs/tab2"
   }
 
