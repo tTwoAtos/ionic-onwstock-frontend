@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 /**
  * Specifics barcode
@@ -7,16 +7,19 @@ import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 import { ProductsService } from '../tab2/service/product/products.service'
 import { Product } from '../tab2/types/product.type'
 import { communityId } from 'src/const'
+import { BehaviorSubject } from 'rxjs'
+import { Tab2Page } from '../tab2/tab2.page'
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page{
+
 
   /**
-   * Wether barcode is available or not defaut true
+   * Wether barcode is available or not defaut false
    */
   isAvailable = false
   isNewProduct = true
@@ -25,13 +28,7 @@ export class Tab1Page {
   products: Product[] = []
   eanByCode: string
 
-  public isToastOpen = false
-  public toastMessage = "Are you sure , to empty the Basket ?"
-  public toastDuration = 3000
   public isModalOpen: boolean = false
-
-  
-
   public product: Product
 
   constructor(private productService: ProductsService) { }
@@ -66,12 +63,6 @@ export class Tab1Page {
       }
     })
 
-    // Open modal or scan on init
-    /*if(this.firstInit){
-          this.getBarcode()
-          this.firstInit=false
-    }*/
-
   }
 
   // Fonction de la modal pour l'ajout par input du eancode quand le scan fonctionne pas
@@ -79,11 +70,15 @@ export class Tab1Page {
     if (this.isAvailable) {
       this.byScan()
     } else {
-      this.isModalOpen = true
+      this.modalOpen()
     }
   }
   public modalClose() {
     this.isModalOpen = false;
+  }
+
+  public modalOpen(){
+    this.isModalOpen = true
   }
 
   //Adding product to basket by code
@@ -92,6 +87,7 @@ export class Tab1Page {
     if(this.eanByCode.length === 13){
       this.toBasket(this.eanByCode)
       this.eanByCode = ""
+      this.modalClose
     }
   }
 
@@ -136,11 +132,6 @@ export class Tab1Page {
   addQuantity(product: Product) {
       product.quantity++
   }
-    
-  // Fonction pour le Toaster 
-  public dismissToast(): void {
-    this.isToastOpen = false
-  }
 
   // Validation du panier
   async validateBasket(): Promise<void> {
@@ -150,6 +141,8 @@ export class Tab1Page {
     })
     // on vide le tableau
     this.products = [];
+    
+    location.href="/tabs/tab2"
   }
 
   // Vidage du panier

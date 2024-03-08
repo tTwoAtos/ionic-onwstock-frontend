@@ -26,7 +26,7 @@
           <h3>{{ product.quantity }}</h3>
         </ion-label>
         <ion-fab vertical="top" horizontal="end" style="margin-top: 2.0625em;">
-          <ion-fab-button id="removeQte{{i}}" size="small" color="danger" [disabled]="product.quantity===0">
+          <ion-fab-button id="removeQte{{i}}" size="small" color="danger">
             <ion-icon name="remove-sharp" (click)="removeQuantity(product)"></ion-icon>
           </ion-fab-button>
         </ion-fab>
@@ -45,13 +45,14 @@
 
   <ion-footer>
     <ion-button (click)="cancel()">Vide le panier</ion-button>
-    <div class="btn-modal-add">
-      <ion-fab-button (click)="getBarcode()">
+    <ng-container>
+      <ion-fab-button (click)="modalOpen()" *ngIf="isAvailable">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
-      <ion-toast [isOpen]="isToastOpen" [message]="toastMessage" [duration]="toastDuration"
-        (didDismiss)="dismissToast()"></ion-toast>
-    </div>
+      <ion-fab-button (click)="getBarcode()">
+        <ion-icon name="Scan"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
   </ion-footer>
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input, SimpleChanges } from '@angular/core'
 import { communityId } from 'src/const'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
@@ -11,11 +11,13 @@ import { Product } from './types/product.type'
 })
 
 export class Tab2Page {
+
   cards: Product[] = []
   product: Product
   isModalOpen: boolean = false
   public deleteMode: boolean = false
   public listToDelete: string[] = []
+
 
   constructor(
     private productService: ProductsService,
@@ -27,7 +29,7 @@ export class Tab2Page {
     this.generateCards()
     this.pubImpl.getPubData()
   }
-
+  
   towardBasket(){
     location.href="/tabs/tab1"
   }
@@ -55,7 +57,7 @@ export class Tab2Page {
       this.cards= this.cards.filter((prod)=> prod.eancode !== product.eancode)
 
       this.listToDelete.push(product.eancode)
-      this.delete()
+      this.productService.massDelete(communityId, this.listToDelete)
       this.listToDelete = []
 
     }else{
@@ -68,7 +70,7 @@ export class Tab2Page {
   }
 
 
-
+  //Suppression mod
   togleDeleteMode() {
     this.deleteMode = !this.deleteMode
 
@@ -80,12 +82,12 @@ export class Tab2Page {
     if (this.listToDelete.length > 0){
 
       this.productService.massDelete(communityId, this.listToDelete).then(() => {
-        console.log("please refresh the list");
-        this.generateCards()
+        //console.log("please refresh the list");
         this.togleDeleteMode()
-    })
+      })
+    }
   }
-  }
+
 
   getIdFromListToDelete(eancode: string) {
     return this.listToDelete.includes(eancode)

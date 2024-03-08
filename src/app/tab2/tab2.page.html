@@ -9,9 +9,8 @@
 <ion-content [fullscreen]="true">
   <!-- Card of Porducts -->
   <ion-list>
-    <div>
       <ion-item *ngFor="let card of cards; let i = index" lines="none"
-        [color]="getIdFromListToDelete(card.eancode) ? 'light' : 'default'" (click)="toggleSelection(card.eancode)">
+        [color]="getIdFromListToDelete(card.eancode) ? 'danger' : 'light'" (click)="toggleSelection(card.eancode)">
         <ion-thumbnail slot="start">
           <img alt="Product" [src]="card.thumbnail" />
         </ion-thumbnail>
@@ -21,25 +20,32 @@
         <ion-label>
           <h3>{{ card.quantity }}</h3>
         </ion-label>
-        <ion-fab vertical="top" horizontal="end" style="margin-top: 2.0625em;">
-          <ion-fab-button id="removeQte{{i}}" size="small" color="danger" [disabled]="card.quantity===0">
-            <ion-icon name="remove-sharp" (click)="removeQuantity(card)"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-        <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 2.0625em;">
-          <ion-fab-button size="small" color="success">
-            <ion-icon name="add-sharp" (click)="addQuantity(card)"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+        <ng-container class="btnQte" horizontal="end">
+          <ion-fab>
+            <ion-fab-button id="removeQte{{i}}" size="small" color="danger">
+              <ion-icon name="remove-sharp" (click)="removeQuantity(card)"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+          <ion-fab>
+            <ion-fab-button size="small" color="success">
+              <ion-icon name="add-sharp" (click)="addQuantity(card)"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ng-container>
       </ion-item>
-    </div>
   </ion-list>
   <pub-page></pub-page>
 
   <!-- Scan button  -->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="!deleteMode">
     <ion-fab-button>
-      <ion-icon [name]="!deleteMode ? 'add-outline' : 'checkmark-outline'" (click)="towardBasket()"></ion-icon>
+      <ion-icon name="add-outline" (click)="towardBasket()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="deleteMode">
+    <ion-fab-button>
+      <ion-icon name="checkmark-outline" (click)="delete()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
