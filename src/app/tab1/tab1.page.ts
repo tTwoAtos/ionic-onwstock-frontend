@@ -25,11 +25,7 @@ export class Tab1Page {
   products: Product[] = []
   eanByCode: string
 
-  public isToastOpen = false
-  public toastMessage = "Are you sure , to empty the Basket ?"
-  public toastDuration = 3000
   public isModalOpen: boolean = false
-
   
 
   public product: Product
@@ -65,12 +61,6 @@ export class Tab1Page {
         )
       }
     })
-
-    // Open modal or scan on init
-    /*if(this.firstInit){
-          this.getBarcode()
-          this.firstInit=false
-    }*/
 
   }
 
@@ -140,11 +130,6 @@ export class Tab1Page {
   
   addQuantity(product: Product) {
       product.quantity++
-  }
-    
-  // Fonction pour le Toaster 
-  public dismissToast(): void {
-    this.isToastOpen = false
   }
 
   // Validation du panier
