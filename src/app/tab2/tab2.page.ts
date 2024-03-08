@@ -39,6 +39,7 @@ export class Tab2Page {
   }
   
   towardBasket(){
+    this.hasValidateBasket=true
     location.href="/tabs/tab1"
   }
 
