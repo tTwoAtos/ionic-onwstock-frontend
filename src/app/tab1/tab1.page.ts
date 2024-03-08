@@ -79,11 +79,15 @@ export class Tab1Page {
     if (this.isAvailable) {
       this.byScan()
     } else {
-      this.isModalOpen = true
+      this.modalOpen()
     }
   }
   public modalClose() {
     this.isModalOpen = false;
+  }
+
+  public modalOpen(){
+    this.isModalOpen = true
   }
 
   //Adding product to basket by code
@@ -92,6 +96,7 @@ export class Tab1Page {
     if(this.eanByCode.length === 13){
       this.toBasket(this.eanByCode)
       this.eanByCode = ""
+      this.modalClose
     }
   }
 
