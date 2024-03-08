@@ -20,16 +20,18 @@
         <ion-label>
           <h3>{{ card.quantity }}</h3>
         </ion-label>
-        <ion-fab vertical="top" horizontal="end" style="margin-top: 2.0625em;">
-          <ion-fab-button id="removeQte{{i}}" size="small" color="danger">
-            <ion-icon name="remove-sharp" (click)="removeQuantity(card)"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-        <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 2.0625em;">
-          <ion-fab-button size="small" color="success">
-            <ion-icon name="add-sharp" (click)="addQuantity(card)"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+        <ng-container class="btnQte" horizontal="end">
+          <ion-fab>
+            <ion-fab-button id="removeQte{{i}}" size="small" color="danger">
+              <ion-icon name="remove-sharp" (click)="removeQuantity(card)"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+          <ion-fab>
+            <ion-fab-button size="small" color="success">
+              <ion-icon name="add-sharp" (click)="addQuantity(card)"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ng-container>
       </ion-item>
   </ion-list>
   <pub-page></pub-page>
