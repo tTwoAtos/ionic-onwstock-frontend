@@ -68,10 +68,10 @@ export class Tab2Page {
   }
 
 
-
+  //Suppression mod
   togleDeleteMode() {
     this.deleteMode = !this.deleteMode
-
+    
     if (!this.deleteMode)
       this.listToDelete = []
   }
@@ -87,10 +87,10 @@ export class Tab2Page {
   }
   }
 
+
   getIdFromListToDelete(eancode: string) {
     return this.listToDelete.includes(eancode)
   }
-
   toggleSelection(eancode: string) {
     if (!this.deleteMode) return
 

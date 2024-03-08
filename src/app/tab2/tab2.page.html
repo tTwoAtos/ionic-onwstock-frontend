@@ -10,7 +10,7 @@
   <!-- Card of Porducts -->
   <ion-list>
       <ion-item *ngFor="let card of cards; let i = index" lines="none"
-        [color]="getIdFromListToDelete(card.eancode) ? 'light' : 'default'" (click)="toggleSelection(card.eancode)">
+        [color]="getIdFromListToDelete(card.eancode) ? 'danger' : 'light'" (click)="toggleSelection(card.eancode)">
         <ion-thumbnail slot="start">
           <img alt="Product" [src]="card.thumbnail" />
         </ion-thumbnail>
