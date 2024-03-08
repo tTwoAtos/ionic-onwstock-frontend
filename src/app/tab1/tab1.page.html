@@ -47,7 +47,7 @@
     <ion-button (click)="cancel()">Vide le panier</ion-button>
     <ng-container>
       <ion-fab-button (click)="modalOpen()" *ngIf="isAvailable">
-        <ion-icon name="text-outline"></ion-icon>
+        <ion-icon name="create-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button (click)="getBarcode()">
         <ion-icon name="barcode-outline"></ion-icon>
@@ -71,7 +71,7 @@
             <ion-input type="text" [counter]="true" maxlength="13" placeholder="Enter barcode" fill="outline"
               [value]="eanByCode" [(ngModel)]="eanByCode" required>
             </ion-input>
-            <ion-button (click)="byCode()">OK</ion-button>
+            <ion-button (click)="byCode()" size="large" style="padding-bottom: 1em;">OK</ion-button>
           </ion-item>
         </ion-list>
       </ion-content>
