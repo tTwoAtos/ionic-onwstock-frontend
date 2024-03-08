@@ -35,9 +35,15 @@
   <pub-page></pub-page>
 
   <!-- Scan button  -->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="!deleteMode">
     <ion-fab-button>
-      <ion-icon [name]="!deleteMode ? 'add-outline' : 'checkmark-outline'" (click)="towardBasket()"></ion-icon>
+      <ion-icon name="add-outline" (click)="towardBasket()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="deleteMode">
+    <ion-fab-button>
+      <ion-icon name="checkmark-outline" (click)="delete()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 

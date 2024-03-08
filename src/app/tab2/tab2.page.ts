@@ -18,7 +18,6 @@ export class Tab2Page {
   public deleteMode: boolean = false
   public listToDelete: string[] = []
 
-  @Input() hasValidateBasket: Boolean = false;
 
   constructor(
     private productService: ProductsService,
@@ -30,16 +29,8 @@ export class Tab2Page {
     this.generateCards()
     this.pubImpl.getPubData()
   }
-
-  ngOnChanges(changes: SimpleChanges): void{
-    if(this.hasValidateBasket){
-      this.generateCards()
-      this.pubImpl.getPubData()
-    }
-  }
   
   towardBasket(){
-    this.hasValidateBasket=true
     location.href="/tabs/tab1"
   }
 
@@ -66,8 +57,10 @@ export class Tab2Page {
       this.cards= this.cards.filter((prod)=> prod.eancode !== product.eancode)
 
       this.listToDelete.push(product.eancode)
-      this.delete()
+      this.productService.massDelete(communityId, this.listToDelete)
       this.listToDelete = []
+      
+      this.generateCards()
 
     }else{
       this.updateProductBdd(product)
@@ -91,17 +84,21 @@ export class Tab2Page {
     if (this.listToDelete.length > 0){
 
       this.productService.massDelete(communityId, this.listToDelete).then(() => {
-        console.log("please refresh the list");
+        //console.log("please refresh the list");
         this.generateCards()
         this.togleDeleteMode()
-    })
-  }
+      })
+    }
   }
 
+  refresh(){
+    this.generateCards()
+  }
 
   getIdFromListToDelete(eancode: string) {
     return this.listToDelete.includes(eancode)
   }
+
   toggleSelection(eancode: string) {
     if (!this.deleteMode) return
 

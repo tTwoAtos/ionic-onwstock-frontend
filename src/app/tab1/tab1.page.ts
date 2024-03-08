@@ -8,6 +8,7 @@ import { ProductsService } from '../tab2/service/product/products.service'
 import { Product } from '../tab2/types/product.type'
 import { communityId } from 'src/const'
 import { BehaviorSubject } from 'rxjs'
+import { Tab2Page } from '../tab2/tab2.page'
 
 @Component({
   selector: 'app-tab1',
@@ -16,8 +17,7 @@ import { BehaviorSubject } from 'rxjs'
 })
 export class Tab1Page{
 
-  @Input() hasValidateBasket: Boolean = false;
-  
+
   /**
    * Wether barcode is available or not defaut false
    */
@@ -141,7 +141,7 @@ export class Tab1Page{
     })
     // on vide le tableau
     this.products = [];
-    this.hasValidateBasket=true
+    
     location.href="/tabs/tab2"
   }
 
