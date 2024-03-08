@@ -1,21 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component } from '@angular/core'
 
 /**
  * Specifics barcode
  */
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
+import { communityId } from 'src/const'
 import { ProductsService } from '../tab2/service/product/products.service'
 import { Product } from '../tab2/types/product.type'
-import { communityId } from 'src/const'
-import { BehaviorSubject } from 'rxjs'
-import { Tab2Page } from '../tab2/tab2.page'
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page{
+export class Tab1Page {
 
 
   /**
@@ -77,17 +75,18 @@ export class Tab1Page{
     this.isModalOpen = false;
   }
 
-  public modalOpen(){
+  public modalOpen() {
     this.isModalOpen = true
   }
 
   //Adding product to basket by code
   async byCode(): Promise<void> {
     //console.log(this.eanByCode)
-    if(this.eanByCode.length === 13){
+    if (this.eanByCode.length === 13) {
       this.toBasket(this.eanByCode)
+      this.modalClose()
       this.eanByCode = ""
-      this.modalClose
+
     }
   }
 
@@ -104,7 +103,7 @@ export class Tab1Page{
     }
   }
 
-  async toBasket(barcode: string){
+  async toBasket(barcode: string) {
     this.products.forEach(product => {
       if (barcode === product.eancode) {
         product.quantity++
@@ -125,12 +124,12 @@ export class Tab1Page{
   // Fonction des boutons de modif quantite
 
   removeQuantity(product: Product) {
-      product.quantity--  
-      if (product.quantity === 0) this.products= this.products.filter((prod)=> prod.eancode !== product.eancode)
+    product.quantity--
+    if (product.quantity === 0) this.products = this.products.filter((prod) => prod.eancode !== product.eancode)
   }
-  
+
   addQuantity(product: Product) {
-      product.quantity++
+    product.quantity++
   }
 
   // Validation du panier
@@ -141,14 +140,14 @@ export class Tab1Page{
     })
     // on vide le tableau
     this.products = [];
-    
-    location.href="/tabs/tab2"
+
+    location.href = "/tabs/tab2"
   }
 
   // Vidage du panier
   async cancel() {
     //console.log("bonjour")
-    this.products=[]
+    this.products = []
     this.hasProduct = false
   }
 

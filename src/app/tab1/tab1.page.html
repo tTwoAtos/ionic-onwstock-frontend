@@ -25,12 +25,12 @@
         <ion-label>
           <h3>{{ product.quantity }}</h3>
         </ion-label>
-        <ion-fab vertical="top" horizontal="end" style="margin-top: 2.0625em;">
-          <ion-fab-button id="removeQte{{i}}" size="small" color="danger">
+        <ion-fab vertical="top" horizontal="end" style="margin-top: 1.95em;">
+          <ion-fab-button size="small" color="danger">
             <ion-icon name="remove-sharp" (click)="removeQuantity(product)"></ion-icon>
           </ion-fab-button>
         </ion-fab>
-        <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 2.0625em;">
+        <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 1.95em;">
           <ion-fab-button size="small" color="success">
             <ion-icon name="add-sharp" (click)="addQuantity(product)"></ion-icon>
           </ion-fab-button>
@@ -47,10 +47,10 @@
     <ion-button (click)="cancel()">Vide le panier</ion-button>
     <ng-container>
       <ion-fab-button (click)="modalOpen()" *ngIf="isAvailable">
-        <ion-icon name="add-outline"></ion-icon>
+        <ion-icon name="text-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button (click)="getBarcode()">
-        <ion-icon name="Scan"></ion-icon>
+        <ion-icon name="barcode-outline"></ion-icon>
       </ion-fab-button>
     </ng-container>
   </ion-footer>
@@ -68,8 +68,8 @@
         <ion-list class="modal-list">
           <ion-item>
             <!-- Add by code -->
-            <ion-input type="text" [counter]="true" maxlength="13" placeholder="Enter barcode"
-              fill="outline" [value]="eanByCode" [(ngModel)]="eanByCode" required >
+            <ion-input type="text" [counter]="true" maxlength="13" placeholder="Enter barcode" fill="outline"
+              [value]="eanByCode" [(ngModel)]="eanByCode" required>
             </ion-input>
             <ion-button (click)="byCode()">OK</ion-button>
           </ion-item>
