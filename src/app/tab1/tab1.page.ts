@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, Output } from '@angular/core'
 
 /**
  * Specifics barcode
@@ -13,10 +13,10 @@ import { communityId } from 'src/const'
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page{
 
   /**
-   * Wether barcode is available or not defaut true
+   * Wether barcode is available or not defaut false
    */
   isAvailable = false
   isNewProduct = true
@@ -26,9 +26,9 @@ export class Tab1Page {
   eanByCode: string
 
   public isModalOpen: boolean = false
-  
-
   public product: Product
+
+  @Output() refreshList: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private productService: ProductsService) { }
 
