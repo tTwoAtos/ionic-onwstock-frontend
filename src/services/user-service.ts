@@ -4,6 +4,7 @@ import { lastValueFrom, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Logins } from 'src/types/logins.type';
 import { User } from 'src/types/user.type';
+import { Community } from './../types/community.type';
 
 @Injectable({
     providedIn: 'root'
@@ -42,7 +43,34 @@ export class UserService {
         return lastValueFrom<any>(request)
     }
 
+    getCommunities(): Promise<Community[]> {
+        const user = this.authUser()
+        const headers = new HttpHeaders()
+            .set('ngrok-skip-browser-warning', 'true')
+
+        const request = this.http.get(environment.API_URL + '/users/communities/user/' + user.id, {
+            headers: headers
+        }).pipe(take(100))
+
+        return lastValueFrom<any>(request)
+    }
+
+    getUsersFromCommmunity(): Promise<User[]> {
+        const user = this.authUser()
+        const headers = new HttpHeaders()
+            .set('ngrok-skip-browser-warning', 'true')
+
+        const request = this.http.get(environment.API_URL + '/users/communities/' + user.loggedInCommunity.id, {
+            headers: headers
+        }).pipe(take(100))
+
+        return lastValueFrom<any>(request)
+    }
+
     isValid(): boolean {
         return !!localStorage.getItem('user')
+    }
+    authUser(): User {
+        return JSON.parse(localStorage.getItem('user') ?? "")
     }
 }

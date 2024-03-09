@@ -3,8 +3,8 @@ import { Role } from "./role.type"
 
 export type User = {
     id: number
-    firstName: string
-    lastName: string
+    firstname: string
+    lastname: string
     email: string
     password: string
     birthdate: Date

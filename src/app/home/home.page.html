@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title class="ion-text-center">
+            {{ authUser.loggedInCommunity.name }}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-card *ngFor="let community of communities">
+        <ion-card *ngFor="let community of communities">
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <ion-text>
+                                <h2>{{community.name}}</h2>
+                            </ion-text>
+                        </ion-col>
+                        <ion-col size="2">
+                            <ion-text>
+                                <h2>{{nbProducts}}</h2>
+                            </ion-text>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-list *ngFor="let emplacement of emplacements | slice:0:3">
+            <ion-item lines="none" [color]="getIdFromListToDelete(emplacement.id) ? 'light' : 'default'">
+                <ion-grid>
+                    <ion-row class="ion-justify-content-between">
+                        <ion-col>
+                            <ion-label>
+                                <h2>{{ emplacement.name }}</h2>
+                            </ion-label>
+                        </ion-col>
+
+                        <ion-col class="ion-text-end ion-text-center h-full" size="2">
+                            <ion-row>
+                                <ion-label class="vertical-center">
+                                    {{ emplacement.nbProducts}}</ion-label>
+                                <ion-label>
+                                    <ion-icon slot="top" name="chevron-forward-outline" size="large"
+                                        class="my-auto"></ion-icon>
+                                </ion-label>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+
+    <ion-content>
+        <ion-grid>
+            <ion-row class="ion-justify-content-between">
+                Membres de la communauté
+            </ion-row>
+
+            <ion-list *ngFor="let user of users">
+                <ion-item lines="none" [color]="getIdFromListToDelete(user.id) ? 'light' : 'default'">
+                    <ion-label>
+                        <h2> - {{ user.firstname }} {{ user.lastname }}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-grid>
+    </ion-content>
+
+    <!-- Add button  -->
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button>
+            <ion-icon name="add-outline" (click)="openModal()"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
