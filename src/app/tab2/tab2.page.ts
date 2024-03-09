@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core'
+import { Component } from '@angular/core'
 import { communityId } from 'src/const'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
@@ -29,9 +29,13 @@ export class Tab2Page {
     this.generateCards()
     this.pubImpl.getPubData()
   }
-  
-  towardBasket(){
-    location.href="/tabs/tab1"
+
+  refresh() {
+    this.generateCards()
+  }
+
+  towardBasket() {
+    location.href = "/tabs/tab1"
   }
 
   generateCards() {
@@ -45,7 +49,6 @@ export class Tab2Page {
     })
   }
 
-
   // Update factor
   addQuantity(product: Product) {
     product.quantity++
@@ -53,20 +56,20 @@ export class Tab2Page {
   }
   removeQuantity(product: Product) {
     product.quantity--
-    if (product.quantity === 0){ 
-      this.cards= this.cards.filter((prod)=> prod.eancode !== product.eancode)
+    if (product.quantity === 0) {
+      this.cards = this.cards.filter((prod) => prod.eancode !== product.eancode)
 
       this.listToDelete.push(product.eancode)
       this.productService.massDelete(communityId, this.listToDelete)
       this.listToDelete = []
 
-    }else{
+    } else {
       this.updateProductBdd(product)
     }
   }
 
-  async updateProductBdd(prod : Product): Promise<void>{
-    this.productService.updateProduct(communityId,this.product)
+  async updateProductBdd(prod: Product): Promise<void> {
+    this.productService.updateProduct(communityId, this.product)
   }
 
 
@@ -79,7 +82,7 @@ export class Tab2Page {
   }
 
   delete() {
-    if (this.listToDelete.length > 0){
+    if (this.listToDelete.length > 0) {
 
       this.productService.massDelete(communityId, this.listToDelete).then(() => {
         //console.log("please refresh the list");

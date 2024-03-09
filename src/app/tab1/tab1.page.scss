@@ -8,14 +8,11 @@
 
 ion-modal {
     position: fixed;
-    height: 150px;
+    height: 175px;
     top: 35%;
-    --width: 80%;
+    margin: 0% 2em 0% 2em;
 }
 
-.modal-list {
-    padding: 0% 10px 0% 10px;
-}
 
 h3 {
     font-size: 3.5em;

@@ -9,34 +9,39 @@
 <ion-content [fullscreen]="true">
   <!-- Card of Porducts -->
   <ion-list>
-      <ion-item *ngFor="let card of cards; let i = index" lines="none"
-        [color]="getIdFromListToDelete(card.eancode) ? 'danger' : 'light'" (click)="toggleSelection(card.eancode)">
-        <ion-thumbnail slot="start">
-          <img alt="Product" [src]="card.thumbnail" />
-        </ion-thumbnail>
-        <ion-label>
-          <h2>{{ card.name }}</h2>
-        </ion-label>
-        <ion-label>
-          <h3>{{ card.quantity }}</h3>
-        </ion-label>
-        <ng-container class="btnQte" horizontal="end">
-          <ion-fab>
-            <ion-fab-button id="removeQte{{i}}" size="small" color="danger">
-              <ion-icon name="remove-sharp" (click)="removeQuantity(card)"></ion-icon>
-            </ion-fab-button>
-          </ion-fab>
-          <ion-fab>
-            <ion-fab-button size="small" color="success">
-              <ion-icon name="add-sharp" (click)="addQuantity(card)"></ion-icon>
-            </ion-fab-button>
-          </ion-fab>
-        </ng-container>
-      </ion-item>
+    <ion-item *ngFor="let card of cards; let i = index" lines="none"
+      [color]="getIdFromListToDelete(card.eancode) ? 'danger' : 'light'" (click)="toggleSelection(card.eancode)">
+      <ion-thumbnail slot="start">
+        <img alt="Product" [src]="card.thumbnail" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ card.name }}</h2>
+      </ion-label>
+      <ion-label>
+        <h3>{{ card.quantity }}</h3>
+      </ion-label>
+      <ion-fab vertical="top" horizontal="end" style="margin-top: 1.95em;">
+        <ion-fab-button size="small" color="danger">
+          <ion-icon name="remove-sharp" (click)="removeQuantity(card)"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 1.95em;">
+        <ion-fab-button size="small" color="success">
+          <ion-icon name="add-sharp" (click)="addQuantity(card)"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-item>
   </ion-list>
   <pub-page></pub-page>
 
   <!-- Scan button  -->
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="center" *ngIf="!deleteMode">
+    <ion-fab-button>
+      <ion-icon name="refresh-outline" (click)="refresh()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="!deleteMode">
     <ion-fab-button>
       <ion-icon name="add-outline" (click)="towardBasket()"></ion-icon>
