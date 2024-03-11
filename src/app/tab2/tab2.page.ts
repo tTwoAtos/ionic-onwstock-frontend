@@ -51,6 +51,7 @@ export class Tab2Page {
 
   // Update factor
   addQuantity(product: Product) {
+
     product.quantity++
     this.updateProductBdd(product)
   }
@@ -69,7 +70,7 @@ export class Tab2Page {
   }
 
   async updateProductBdd(prod: Product): Promise<void> {
-    this.productService.updateProduct(communityId, this.product)
+    this.productService.updateProduct(communityId, prod).subscribe()
   }
 
 

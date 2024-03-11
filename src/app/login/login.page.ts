@@ -36,7 +36,7 @@ export class LoginPage {
   login() {
     this.userService.login(this.logins).then((res) => {
       localStorage.setItem('user', JSON.stringify(res))
-      this.router.navigate(['/home'])
+      this.router.navigate(['/tabs/home'])
     })
       .catch((err) => {
         if (this.form?.errors)
