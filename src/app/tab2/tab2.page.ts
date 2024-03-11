@@ -34,10 +34,6 @@ export class Tab2Page {
     this.generateCards()
   }
 
-  towardBasket() {
-    location.href = "/tabs/tab1"
-  }
-
   generateCards() {
     let pubIndex: number = 0
     this.productService.getProductsByCommunity(communityId).subscribe(listIDproducts => {

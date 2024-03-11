@@ -1,17 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Lieux de stockage
+      Mes emplacements
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let emplacement of emplacements" (click)="toggleSelection(emplacement.id)"
-    [color]="getIdFromListToDelete(emplacement.id) ? 'light' : 'default'">
+    [color]="getIdFromListToDelete(emplacement.id) ? 'danger' : 'default'">
     <ion-card-content>
       <ion-grid>
-        <ion-item lines="none" [color]="getIdFromListToDelete(emplacement.id) ? 'light' : 'default'">
+        <ion-item lines="none" [color]="getIdFromListToDelete(emplacement.id) ? 'danger' : 'default'">
           <ion-row class="ion-justify-content-between">
             <ion-col>
               <ion-label>

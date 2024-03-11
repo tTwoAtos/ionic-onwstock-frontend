@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Product List
+      Mon stock
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -43,8 +43,8 @@
   </ion-fab>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="!deleteMode">
-    <ion-fab-button>
-      <ion-icon name="add-outline" (click)="towardBasket()"></ion-icon>
+    <ion-fab-button href="/tabs/tab1">
+      <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 

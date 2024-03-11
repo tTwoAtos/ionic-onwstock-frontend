@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
-        <ion-title class="ion-text-center">
+        <ion-title class="ion-text">
             {{ authUser.loggedInCommunity.name }}
         </ion-title>
     </ion-toolbar>
@@ -8,18 +8,18 @@
 
 <ion-content [fullscreen]="true">
     <ion-card *ngFor="let community of communities">
-        <ion-card *ngFor="let community of communities">
+        <ion-card color="medium">
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
                         <ion-col>
                             <ion-text>
-                                <h2>{{community.name}}</h2>
+                                <h1>{{community.name}}</h1>
                             </ion-text>
                         </ion-col>
                         <ion-col size="2">
                             <ion-text>
-                                <h2>{{nbProducts}}</h2>
+                                <h1>{{nbProducts}}</h1>
                             </ion-text>
                         </ion-col>
                     </ion-row>
@@ -55,15 +55,14 @@
 
 
     <ion-content>
-        <ion-grid>
+        <ion-grid style="margin-left: 1em;">
             <ion-row class="ion-justify-content-between">
-                Membres de la communauté
+                Membres de la communauté :
             </ion-row>
-
             <ion-list *ngFor="let user of users">
                 <ion-item lines="none" [color]="getIdFromListToDelete(user.id) ? 'light' : 'default'">
                     <ion-label>
-                        <h2> - {{ user.firstname }} {{ user.lastname }}</h2>
+                        <h2> {{ user.firstname }} {{ user.lastname }}</h2>
                     </ion-label>
                 </ion-item>
             </ion-list>
@@ -71,9 +70,12 @@
     </ion-content>
 
     <!-- Add button  -->
+
+    <!--
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
         <ion-fab-button>
             <ion-icon name="add-outline" (click)="openModal()"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+-->
 </ion-content>
