@@ -1,10 +1,10 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
 import { communityId } from 'src/const'
 import { EmplacementsService } from 'src/services/emplacement.service'
 import { UserService } from 'src/services/user-service'
 import { Community } from 'src/types/community.type'
-import { Emplacement } from 'src/types/emplacement.type'
 import { User } from 'src/types/user.type'
 
 
@@ -15,7 +15,6 @@ import { User } from 'src/types/user.type'
 })
 export class HomePage {
   public authUser: User
-  emplacements: Emplacement[]
   users: User[]
   communities: Community[]
   isModalOpen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
@@ -23,25 +22,36 @@ export class HomePage {
   public listToDelete: number[] = []
   public nbProducts: number
 
-  constructor(private emplacementService: EmplacementsService, private userService: UserService) { }
+  constructor(private emplacementService: EmplacementsService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.authUser = this.userService.authUser()
 
-    this.emplacementService.getAll(communityId).subscribe(async (datas) => {
-      let nbProducts = 0
-      for (let i = 0; i < datas.length; i++) {
-        datas[i].nbProducts = await this.emplacementService.count(datas[i].id, communityId)
-        nbProducts += datas[i].nbProducts
-      }
+    this.userService.getCommunities().then((communities) => {
+      this.communities = communities
 
-      this.emplacements = datas
-      this.nbProducts = nbProducts
+      communities.forEach(community => {
+        this.emplacementService.getAll(community.id).subscribe(async (datas) => {
+          let nbProducts = 0
+          for (let i = 0; i < datas.length; i++) {
+            datas[i].nbProducts = await this.emplacementService.count(datas[i].id, communityId)
+            nbProducts += datas[i].nbProducts
+          }
+
+          community.emplacements = datas
+          community.nbProducts = nbProducts
+        })
+      });
     })
 
-    this.userService.getCommunities().then((communities) => this.communities = communities)
-
     this.userService.getUsersFromCommmunity().then((users) => this.users = users)
+  }
+
+  redirectToCommunity(community: Community) {
+    localStorage.setItem('community', JSON.stringify(community))
+    this.router.navigateByUrl('tabs/tab2', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['tabs/tab2'])
+    })
   }
 
   openModal() {

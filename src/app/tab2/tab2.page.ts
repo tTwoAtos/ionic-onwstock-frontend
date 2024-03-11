@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
 import { communityId } from 'src/const'
 import { PubPageComponent } from './pub/pub.component'
 import { ProductsService } from './service/product/products.service'
@@ -21,11 +22,13 @@ export class Tab2Page {
 
   constructor(
     private productService: ProductsService,
-    private pubImpl: PubPageComponent
+    private pubImpl: PubPageComponent,
+    private router: Router
   ) { }
 
   ngOnInit() {
     /*this.productcard = productcard */
+
     this.generateCards()
     this.pubImpl.getPubData()
   }
@@ -36,7 +39,7 @@ export class Tab2Page {
 
   generateCards() {
     let pubIndex: number = 0
-    this.productService.getProductsByCommunity(communityId).subscribe(listIDproducts => {
+    this.productService.getProductsByCommunity().subscribe(listIDproducts => {
       this.cards = listIDproducts
 
       for (let i = 0; i < this.cards.length; i++) {

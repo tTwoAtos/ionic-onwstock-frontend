@@ -8,7 +8,7 @@
 
 <ion-content [fullscreen]="true">
     <ion-card *ngFor="let community of communities">
-        <ion-card color="medium">
+        <ion-card color="medium" (click)="redirectToCommunity(community)">
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
@@ -18,16 +18,24 @@
                             </ion-text>
                         </ion-col>
                         <ion-col size="2">
-                            <ion-text>
-                                <h1>{{nbProducts}}</h1>
-                            </ion-text>
+                            <ion-row>
+                                <ion-text class="vertical-center">
+                                    <h1>
+                                        {{community.nbProducts}}
+                                    </h1>
+                                </ion-text>
+                                <ion-label>
+                                    <ion-icon slot="top" name="chevron-forward-outline" size="large"
+                                        class="my-auto"></ion-icon>
+                                </ion-label>
+                            </ion-row>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-card-content>
         </ion-card>
 
-        <ion-list *ngFor="let emplacement of emplacements | slice:0:3">
+        <ion-list *ngFor="let emplacement of community.emplacements| slice:0:3">
             <ion-item lines="none" [color]="getIdFromListToDelete(emplacement.id) ? 'light' : 'default'">
                 <ion-grid>
                     <ion-row class="ion-justify-content-between">
@@ -41,20 +49,18 @@
                             <ion-row>
                                 <ion-label class="vertical-center">
                                     {{ emplacement.nbProducts}}</ion-label>
-                                <ion-label>
-                                    <ion-icon slot="top" name="chevron-forward-outline" size="large"
-                                        class="my-auto"></ion-icon>
-                                </ion-label>
+                                <!-- <ion-label> -->
+                                <!-- <ion-icon slot="top" name="chevron-forward-outline" size="large"
+                                        class="my-auto"></ion-icon> -->
+                                <!-- </ion-label> -->
                             </ion-row>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-item>
         </ion-list>
-    </ion-card>
 
-
-    <ion-content>
+        <!-- <ion-content> -->
         <ion-grid style="margin-left: 1em;">
             <ion-row class="ion-justify-content-between">
                 Membres de la communauté :
@@ -67,7 +73,9 @@
                 </ion-item>
             </ion-list>
         </ion-grid>
-    </ion-content>
+        <!-- </ion-content> -->
+    </ion-card>
+
 
     <!-- Add button  -->
 

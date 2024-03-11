@@ -52,7 +52,7 @@ export class ProductsService implements IProductsInterfaceService {
         communityId: communityId,
         qte: product.quantity
       },
-      { headers: headers })
+        { headers: headers })
   }
 
 
@@ -61,7 +61,9 @@ export class ProductsService implements IProductsInterfaceService {
    * @param communityId The ID of the community.
    * @returns An Observable that emits the response containing the products.
    */
-  getProductsByCommunity(communityId: string): Observable<any> {
+  getProductsByCommunity(): Observable<any> {
+    const communityId: string = JSON.parse(localStorage.getItem('community') ?? "").id
+
     const headers = new HttpHeaders()
       .set('ngrok-skip-browser-warning', 'true')
     return this.http.get(environment.API_URL + `/product-to-community/${communityId}`, { headers: headers })
@@ -89,11 +91,11 @@ export class ProductsService implements IProductsInterfaceService {
    */
   updateProduct(communityId: string, product: Product): Observable<any> {
     const headers = new HttpHeaders()
-    
+
     return this.http.put(environment.API_URL + `/product-to-community/${communityId}/${product.eancode}`, {
       qte: product.quantity
     },
-    { headers: headers })
+      { headers: headers })
   }
 
   /**

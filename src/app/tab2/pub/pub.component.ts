@@ -23,7 +23,7 @@ export class PubPageComponent {
     this.pubService.getPub().subscribe(
       datas => {
         this.pubData = datas
-        console.log(this.pubData)
+        //console.log(this.pubData)
       },
       error => {
         console.log('Error: ', error)
