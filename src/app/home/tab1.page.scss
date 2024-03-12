@@ -1,0 +1,30 @@
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    top: 0%
+}
+
+ion-modal {
+    position: fixed;
+    height: 150px;
+    top: 35%;
+    --width: 80%;
+}
+
+.modal-list {
+    padding: 0% 10px 0% 10px;
+}
+
+
+ion-footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    background-blend-mode: color;
+    border: none;
+}
