@@ -81,7 +81,7 @@ export class Tab1Page {
 
   //Adding product to basket by code
   async byCode(): Promise<void> {
-    //console.log(this.eanByCode)
+    console.log(this.eanByCode)
     if (this.eanByCode.length === 13) {
       this.toBasket(this.eanByCode)
       this.modalClose()
@@ -140,7 +140,6 @@ export class Tab1Page {
     })
     // on vide le tableau
     this.products = [];
-
     location.href = "/tabs/tab2"
   }
 

@@ -31,6 +31,8 @@ export class ProductsService implements IProductsInterfaceService {
    */
   saveProduct(barcode: string): Observable<any> {
     const headers = new HttpHeaders()
+      .set('ngrok-skip-browser-warning', 'true')
+
     return this.http
       .get(environment.API_URL + `/products/${barcode}`, {
         headers: headers
@@ -46,6 +48,8 @@ export class ProductsService implements IProductsInterfaceService {
   addProduct(product: Product, communityId: string): Observable<any> {
     //console.log(product, communityId)
     const headers = new HttpHeaders()
+      .set('ngrok-skip-browser-warning', 'true')
+
     return this.http
       .post(environment.API_URL + `/product-to-community/${communityId}`, {
         productId: product.eancode,
@@ -66,6 +70,7 @@ export class ProductsService implements IProductsInterfaceService {
 
     const headers = new HttpHeaders()
       .set('ngrok-skip-browser-warning', 'true')
+
     return this.http.get(environment.API_URL + `/product-to-community/${communityId}`, { headers: headers })
   }
 
@@ -91,10 +96,12 @@ export class ProductsService implements IProductsInterfaceService {
    */
   updateProduct(communityId: string, product: Product): Observable<any> {
     const headers = new HttpHeaders()
+      .set('ngrok-skip-browser-warning', 'true')
 
-    return this.http.put(environment.API_URL + `/product-to-community/${communityId}/${product.eancode}`, {
-      qte: product.quantity
-    },
+    return this.http.put(environment.API_URL + `/product-to-community/${communityId}/${product.eancode}`,
+      {
+        qte: product.quantity
+      },
       { headers: headers })
   }
 
